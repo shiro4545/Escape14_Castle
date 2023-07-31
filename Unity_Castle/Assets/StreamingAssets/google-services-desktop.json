@@ -1,0 +1,36 @@
+{
+  "project_info": {
+    "project_number": "273699688159",
+    "project_id": "harekore-cd3a8",
+    "storage_bucket": "harekore-cd3a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273699688159:ios:0a1b08490eb1986717a36a",
+        "android_client_info": {
+          "package_name": "com.Harekore.School"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWMLGjXl60QPaEhDoJ2nXWv1xLITEbwfE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273699688159-g9huq6mpud7e0n2vmeav8u9vnjnf3c0o.apps.googleusercontent.com"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}
