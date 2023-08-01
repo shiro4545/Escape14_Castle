@@ -105,6 +105,8 @@ public class UIManager : MonoBehaviour
     public ClearManager ClearClass;
     //広告クラス
     public GoogleAds GoogleAds;
+    //IDFAクラス
+    public IDFA IDFAClass;
     //iOS IAPクラス
     public IAPiOS IAPiOSClass;
 
@@ -138,15 +140,9 @@ public class UIManager : MonoBehaviour
         //セーブデータの有無→有ればデータロード
         isExistFile = SaveLoadSystem.Instance.CheckFileExist();
 
-        if (!isExistFile)
-            SaveLoadSystem.Instance.GameStart();
-
-        //広告クラス初期化
-        Ads.AdsInitial();
-            
 
         //セーブデータがあればサウンドの切替
-        if(isExistFile)
+        if (isExistFile)
             ChangeSound();
 
         //セーブデータがあれば全クリ有無を判定
@@ -158,6 +154,17 @@ public class UIManager : MonoBehaviour
         //「続きから」ボタンの活性切替
         if (!isExistFile || _isClearAll)
             BtnTitle_Continue.GetComponent<Button>().interactable = false;
+
+        if (!isExistFile)
+            SaveLoadSystem.Instance.GameStart();
+
+        //IDFA表示
+        IDFAClass.Initial();
+
+        //広告クラス初期化
+        Ads.AdsInitial();
+            
+
 
 
 
@@ -422,8 +429,8 @@ public class UIManager : MonoBehaviour
         //課金ボタンの表示・非表示
         if (!SaveLoadSystem.Instance.gameData.isPurchase
             && Application.platform == RuntimePlatform.IPhonePlayer
-            && IAPiOSClass.IsInitialized()
-            && Ads.isGetMovie)
+            && IAPiOSClass.IsInitialized())
+            //&& Ads.isGetMovie)
         {
             BtnHint_Back2.SetActive(true);
             BtnHint_ToPur.SetActive(true);
@@ -634,6 +641,8 @@ public class UIManager : MonoBehaviour
     public void HideATTAPnel()
     {
         ATTPanel.SetActive(false);
+        SaveLoadSystem.Instance.gameData.isATT = true;
+        SaveLoadSystem.Instance.Save();
         _IDFA.ShowIDFA();
     }
 

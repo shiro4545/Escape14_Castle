@@ -65,6 +65,7 @@ public class SaveLoadSystem
     public void GameStart2nd()
     {
         //サウンドと課金データを避難させる
+        bool _isATT = gameData.isATT;
         bool _isPurchase = gameData.isPurchase;
         float _volueBGM = gameData.VolumeBGM;
         float _volueSE = gameData.VolumeSE;
@@ -72,6 +73,7 @@ public class SaveLoadSystem
         //ゲームデータを初期化
         gameData = new GameData();
 
+        gameData.isATT = _isATT;
         gameData.isPurchase = _isPurchase;
         gameData.VolumeBGM = _volueBGM;
         gameData.VolumeSE = _volueSE;

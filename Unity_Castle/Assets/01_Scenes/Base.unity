@@ -6788,6 +6788,7 @@ MonoBehaviour:
   StartResetClass: {fileID: 327876180}
   ClearClass: {fileID: 1772662943}
   GoogleAds: {fileID: 1266667270}
+  IDFAClass: {fileID: 1974706460}
   IAPiOSClass: {fileID: 1521613997}
   ForTitle: {fileID: 0}
   audioSE: {fileID: 1638915959}
@@ -9403,7 +9404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1974706459
 Transform:
   m_ObjectHideFlags: 0

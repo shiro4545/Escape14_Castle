@@ -51,9 +51,9 @@ public class GoogleAds : MonoBehaviour
     private void RequestHeaderBanner()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-7464443980940177/9445308549"; //Android
+        string adUnitId = "ca-app-pub-7464443980940177/7563395981"; //Android
 #elif UNITY_IOS
-        string adUnitId = "ca-app-pub-7464443980940177/1047943775"; //iOS
+        string adUnitId = "ca-app-pub-7464443980940177/2502640998"; //iOS
 #else
         //テスト
         string adUnitId = "ca-app-pub-3940256099942544/2934735716";
@@ -76,9 +76,9 @@ public class GoogleAds : MonoBehaviour
     private void RequestFooterBanner()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-7464443980940177/3446559179"; //Android
+        string adUnitId = "ca-app-pub-7464443980940177/8911356427"; //Android
 #elif UNITY_IOS
-        string adUnitId = "ca-app-pub-7464443980940177/4931294569"; //iOS
+        string adUnitId = "ca-app-pub-7464443980940177/6350386668"; //iOS
 #else
         //テスト
         string adUnitId = "ca-app-pub-3940256099942544/2934735716";
@@ -138,9 +138,9 @@ public class GoogleAds : MonoBehaviour
     public void RequestInterstitial()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-7464443980940177/9820395836"; //Andorid
+        string adUnitId = "ca-app-pub-7464443980940177/6250314311"; //Andorid
 #elif UNITY_IOS
-        string adUnitId = "ca-app-pub-7464443980940177/2305131222"; //iOS
+        string adUnitId = "ca-app-pub-7464443980940177/7020470500"; //iOS
 #else
         string adUnitId = "ca-app-pub-3940256099942544/8691691433";
 #endif
@@ -198,9 +198,9 @@ public class GoogleAds : MonoBehaviour
     public void RequestInterstitial2()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-7464443980940177/6032677141"; //Andorid
+        string adUnitId = "ca-app-pub-7464443980940177/3624150978"; //Andorid
 #elif UNITY_IOS
-        string adUnitId = "ca-app-pub-7464443980940177/8878278432"; //iOS
+        string adUnitId = "ca-app-pub-7464443980940177/2829944050"; //iOS
 #else
         string adUnitId = "ca-app-pub-3940256099942544/8691691433";
 #endif
@@ -262,9 +262,9 @@ public class GoogleAds : MonoBehaviour
     {
         string adUnitId = "";
 #if UNITY_ANDROID
-        adUnitId = "ca-app-pub-7464443980940177/1347326673"; //Android
+        adUnitId = "ca-app-pub-7464443980940177/5707388833"; //Android
 #elif UNITY_IOS
-        adUnitId = "ca-app-pub-7464443980940177/4001410179"; //iOS
+        adUnitId = "ca-app-pub-7464443980940177/6769189069"; //iOS
 #else
         //テスト
         adUnitId = "ca-app-pub-3940256099942544/1712485313";

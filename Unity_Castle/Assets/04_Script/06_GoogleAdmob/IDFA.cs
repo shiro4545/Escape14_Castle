@@ -14,13 +14,11 @@ public class IDFA : MonoBehaviour
 #endif
 
 
-    private void Start()
+    public void Initial()
     {
-
-        //セーブデータの有無→有ればATT説明パネルを表示
 #if UNITY_IOS
-        if(!SaveLoadSystem.Instance.CheckFileExist())
-            Invoke("DelayShowATTPanel", 1);//1秒遅らせてDelayIDFA()の呼び出し　(iOS15では遅延させないと表示されないため)
+        if (!SaveLoadSystem.Instance.gameData.isATT)
+            Invoke("DelayShowATTPanel", 1);//1秒遅らせてDelayIDFA()の呼び出し
 #endif
 
     }
