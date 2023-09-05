@@ -108,12 +108,51 @@ public class CameraManager : MonoBehaviour
             "RoomStart",//
             new CameraPositionInfo
             {
-               Position=new Vector3(49.412f,1.5f,-38.531f),
-                Rotate =new Vector3(4,-139,0),
+               Position=new Vector3(151.632f,10.5f,108.212f),
+                Rotate =new Vector3(5,125,0),
                 MoveNames=new MoveNames
                 {
-                    Right = "RoomKokuban",
-                    Left = "RoomWindow"
+                    Right = "Room",
+                    Left = "Room"
+                },
+            }
+        },
+        {
+            "Room2",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(151.421f,10.5f,109.366f),
+                Rotate =new Vector3(5,-47,0),
+                MoveNames=new MoveNames
+                {
+                    Right = "Room",
+                    Left = "Room"
+                },
+            }
+        },
+        {
+            "Room3",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(147.043f,10.5f,109.455f),
+                Rotate =new Vector3(5,60,0),
+                MoveNames=new MoveNames
+                {
+                    Right = "Room",
+                    Left = "Room"
+                },
+            }
+        },
+        {
+            "Room4",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(147.552f,10.5f,109.159f),
+                Rotate =new Vector3(5,135,0),
+                MoveNames=new MoveNames
+                {
+                    Right = "Room",
+                    Left = "Room"
                 },
             }
         },
