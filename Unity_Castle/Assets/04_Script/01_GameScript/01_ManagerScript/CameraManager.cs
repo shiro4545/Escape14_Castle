@@ -157,6 +157,36 @@ public class CameraManager : MonoBehaviour
             }
         },
         //====RoomStart派生==============
+        
+        //****************************************************************************************
+        //外
+        //****************************************************************************************
+        {
+            "OutKajiya",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(193.61f,13.26062f,138.67f),
+                Rotate =new Vector3(5,147,0),
+                MoveNames=new MoveNames
+                {
+                    Right = "OutYashiki",
+                    Left = "OutGate"
+                },
+            }
+        },
+        //====xxx派生==============
+        {
+            "View",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(162.072f,38.181f,180.243f),
+                Rotate =new Vector3(43,90,0),
+                MoveNames=new MoveNames
+                {
+                    Back = ""
+                },
+            }
+        },
     };
 
     // Start is called before the first frame update
