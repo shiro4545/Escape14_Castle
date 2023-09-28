@@ -19,7 +19,6 @@ public class LocalizeManager : MonoBehaviour
     public GameObject[] Objects_ja;
     public GameObject[] Objects_en;
     public GameObject[] Objects_ch;
-    public GameObject[] Objects_sp;
     public GameObject[] Objects_ko;
 
     // Start is called before the first frame update
@@ -37,9 +36,9 @@ public class LocalizeManager : MonoBehaviour
         else if (LanguageNo == 3)
             Lang = SystemLanguage.Chinese;
         else if (LanguageNo == 4)
-            Lang = SystemLanguage.Spanish;
-        else if (LanguageNo == 5)
             Lang = SystemLanguage.Korean;
+        //else if (LanguageNo == 5)
+        //    Lang = SystemLanguage.Spanish;
         else
             Lang = SystemLanguage.English;
 
@@ -55,8 +54,8 @@ public class LocalizeManager : MonoBehaviour
             obj.SetActive(false);
         foreach (var obj in Objects_ch)
             obj.SetActive(false);
-        foreach (var obj in Objects_sp)
-            obj.SetActive(false);
+        //foreach (var obj in Objects_sp)
+        //    obj.SetActive(false);
         foreach (var obj in Objects_ko)
             obj.SetActive(false);
 
@@ -71,11 +70,11 @@ public class LocalizeManager : MonoBehaviour
             foreach (var obj in Objects_ch)
                 obj.SetActive(true);
         }
-        else if(Lang == SystemLanguage.Spanish)
-        {
-            foreach (var obj in Objects_sp)
-                obj.SetActive(true);
-        }
+        //else if(Lang == SystemLanguage.Spanish)
+        //{
+        //    foreach (var obj in Objects_sp)
+        //        obj.SetActive(true);
+        //}
         else if (Lang == SystemLanguage.Korean)
         {
             foreach (var obj in Objects_ko)

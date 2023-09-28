@@ -62,13 +62,20 @@ public class CameraManager : MonoBehaviour
     public TapFadeCameraMove[] ArrowsFade;
 
 
-
     //オブジェクト(リセット用)
     public UIManager UI;
 
-    //public CurtainBtn_Tap[] CurtainBtnArray;
-    //public CurtainBtn_Judge CurtainBtn;
+    public Koban_Judge Koban;
+    public Koban_Tap[] KobanAr;
 
+    public WallBtn_Judge WallBtn;
+    public WallBtn_Tap[] WallBtnAr;
+
+    public SensuBtn_Judge SensuBtn;
+    public SensuBtn_Tap[] SensuBtnAr;
+
+    public Paper_Judge Paper;
+    public Paper_Tap[] PaperAr;
 
 
     //<summary>
@@ -80,8 +87,8 @@ public class CameraManager : MonoBehaviour
             "Title",//タイトル画面
             new CameraPositionInfo
             {
-               Position=new Vector3(54.166f,1.842168f,-37.41803f),
-                Rotate =new Vector3(8,257,0),
+               Position=new Vector3(225.88f,9.33f,124.52f),
+                Rotate =new Vector3(-10,-48,0),
                 MoveNames=new MoveNames
                 {
                 },
@@ -391,7 +398,7 @@ public class CameraManager : MonoBehaviour
             "Rousoku0",//
             new CameraPositionInfo
             {
-               Position=new Vector3(159.0533f,9.856f,116.0338f),
+               Position=new Vector3(158.468f,9.856f,115.778f),
                 Rotate =new Vector3(0,67,0),
                 MoveNames=new MoveNames
                 {
@@ -427,7 +434,7 @@ public class CameraManager : MonoBehaviour
             "Paper",//
             new CameraPositionInfo
             {
-               Position=new Vector3(151.767f,9.713f,110.197f),
+               Position=new Vector3(151.843f,9.713f,110.314f),
                 Rotate =new Vector3(51,33,0),
                 MoveNames=new MoveNames
                 {
@@ -476,7 +483,7 @@ public class CameraManager : MonoBehaviour
             "SensuBtn",//
             new CameraPositionInfo
             {
-               Position=new Vector3(159.0111f,11.05f,101.308f),
+               Position=new Vector3(159.0111f,11.12f,101.308f),
                 Rotate =new Vector3(10,90,0),
                 MoveNames=new MoveNames
                 {
@@ -522,7 +529,7 @@ public class CameraManager : MonoBehaviour
                 Rotate =new Vector3(-8,-42,0),
                 MoveNames=new MoveNames
                 {
-                    Right = "OutKajiya",
+                    Right = "OutIke",
                     Left = "OutYashiki"
                 },
             }
@@ -834,7 +841,7 @@ public class CameraManager : MonoBehaviour
             new CameraPositionInfo
             {
                Position=new Vector3(153.6f,15.64356f,157.77f),
-                Rotate =new Vector3(13,-78,0),
+                Rotate =new Vector3(8,-78,0),
                 MoveNames=new MoveNames
                 {
                     Back = "ShiroGate"
@@ -849,7 +856,7 @@ public class CameraManager : MonoBehaviour
                 Rotate =new Vector3(15,0,0),
                 MoveNames=new MoveNames
                 {
-                    Back = "Door3"
+                    Back = "ShiroGate"
                 },
             }
         },
@@ -1299,10 +1306,14 @@ public class CameraManager : MonoBehaviour
             AudioManager.Instance.SoundSE("TapUIBtn");
 
             //ボタン状態のリセット
-            if (CurrentPositionName == "CurtainBtn")
-                ResetBtn();
-            else if (CurrentPositionName == "Sankaku")
-                ResetBtn();
+            if (CurrentPositionName == "Koban")
+                ResetKoban();
+            else if (CurrentPositionName == "WallBtn")
+                ResetWallBtn();
+            else if (CurrentPositionName == "SensuBtn")
+                ResetSensuBtn();
+            else if (CurrentPositionName == "Paper")
+                ResetPaper();
 
             ChangeCameraPosition(CameraPositionInfoes[CurrentPositionName].MoveNames.Back);
 
@@ -1487,19 +1498,80 @@ public class CameraManager : MonoBehaviour
     /// <summary>
     /// ボタンの表示をリセット　
     /// </summary>
-    private void ResetBtn()
+    private void ResetKoban()
     {
-        //    if (SaveLoadSystem.Instance.gameData.isClearCurtain1 &&
-        //        SaveLoadSystem.Instance.gameData.isClearCurtain2 )
-        //        return;
-        //    CurtainBtn.Status = "00000000";
+        if (SaveLoadSystem.Instance.gameData.isClearTatami)
+        return;
 
-        //    foreach (var obj in CurtainBtnArray)
-        //    {
-        //        foreach (var btn in obj.Btns)
-        //            btn.SetActive(false);
-        //        obj.Btns[0].SetActive(true);
-        //    }
+
+        Koban.Status = "000";
+        Koban.Before.SetActive(true);
+        Koban.After.SetActive(false);
+        foreach (var tap in KobanAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetWallBtn()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearWall)
+            return;
+
+
+        WallBtn.Status = "000";
+        WallBtn.Before.SetActive(true);
+        WallBtn.After.SetActive(false);
+        foreach (var tap in WallBtnAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetSensuBtn()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearWallBtn)
+            return;
+
+        SensuBtn.Status = "0000";
+        SensuBtn.Before.SetActive(true);
+        SensuBtn.After.SetActive(false);
+        SensuBtn.Key.SetActive(false);
+        foreach (var tap in SensuBtnAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetPaper()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearDoor2)
+            return;
+
+        Paper.Status = "000";
+        Paper.Before.SetActive(true);
+        Paper.Rousoku.SetActive(false);
+        foreach (var tap in PaperAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
     }
 
 }

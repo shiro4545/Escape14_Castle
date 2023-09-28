@@ -19,7 +19,8 @@ public class ItemManager : MonoBehaviour
     public GameObject ItemImage;
 
     //特定アイテムでの透明ボタン
-    public GameObject BtnBottle;
+    public GameObject BtnKatana;
+    public GameObject BtnMakimono1;
 
     // Start is called before the first frame update
     void Start()
@@ -36,9 +37,13 @@ public class ItemManager : MonoBehaviour
         }
 
         //アイテム拡大画面でタップする場合
-        BtnBottle.GetComponent<Button>().onClick.AddListener(() =>
+        BtnKatana.GetComponent<Button>().onClick.AddListener(() =>
         {
-            TapBottle();
+            TapKatana();
+        });
+        BtnMakimono1.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            TapMakimono1();
         });
     }
 
@@ -64,10 +69,36 @@ public class ItemManager : MonoBehaviour
         AudioManager.Instance.SoundSE("ItemGet");
 
         //セーブデータ
-        //if (itemName == "Key1")
-        //    SaveLoadSystem.Instance.gameData.isGetKey1 = true;
-        //else if (itemName == "Key2")
-        //    SaveLoadSystem.Instance.gameData.isGetKey2 = true;
+        if (itemName == "Key1")
+            SaveLoadSystem.Instance.gameData.isGetKey1 = true;
+        else if (itemName == "Key2")
+            SaveLoadSystem.Instance.gameData.isGetKey2 = true;
+        else if (itemName == "Key3")
+            SaveLoadSystem.Instance.gameData.isGetKey3 = true;
+        else if (itemName == "Rousoku1")
+            SaveLoadSystem.Instance.gameData.isGetRousoku1 = true;
+        else if (itemName == "Rousoku3")
+            SaveLoadSystem.Instance.gameData.isGetRousoku3 = true;
+        else if (itemName == "Katana1")
+            SaveLoadSystem.Instance.gameData.isGetKatana = true;
+        else if (itemName == "Syuriken1")
+            SaveLoadSystem.Instance.gameData.isGetSyuriken1 = true;
+        else if (itemName == "Syuriken2")
+            SaveLoadSystem.Instance.gameData.isGetSyuriken2 = true;
+        else if (itemName == "Syuriken3")
+            SaveLoadSystem.Instance.gameData.isGetSyuriken3 = true;
+        else if (itemName == "Makimono1")
+            SaveLoadSystem.Instance.gameData.isGetMakimono1 = true;
+        else if (itemName == "Makimono2")
+            SaveLoadSystem.Instance.gameData.isGetMakimono2 = true;
+        else if (itemName == "Ya")
+            SaveLoadSystem.Instance.gameData.isGetYa = true;
+        else if (itemName == "Arrow")
+            SaveLoadSystem.Instance.gameData.isGetArrow = true;
+        else if (itemName == "Kuwa")
+            SaveLoadSystem.Instance.gameData.isGetKuwa = true;
+        else if (itemName == "Oke")
+            SaveLoadSystem.Instance.gameData.isGetOke = true;
 
         SaveLoadSystem.Instance.gameData.getItems += itemName + ";";
         SaveLoadSystem.Instance.Save();
@@ -153,13 +184,13 @@ public class ItemManager : MonoBehaviour
         CameraManager.Instance.ButtonBack.SetActive(true);
 
         //透明ボタンを非表示
-        BtnBottle.SetActive(false);
+        BtnKatana.SetActive(false);
 
         //透明ボタン表示
-        if (SelectItem == "Bottle1")
-            BtnBottle.SetActive(true);
-         else if (SelectItem == "Can1")
-            BtnBottle.SetActive(true);
+        if (SelectItem == "Katana1")
+            BtnKatana.SetActive(true);
+         else if (SelectItem == "Makimono1")
+            BtnMakimono1.SetActive(true);
 
     }
 
@@ -371,8 +402,8 @@ public class ItemManager : MonoBehaviour
                 returnName = itemName.Replace("_lang", "_ja");
             else if (LocalizeManager.Instance.Lang == SystemLanguage.Chinese || LocalizeManager.Instance.Lang == SystemLanguage.ChineseSimplified)
                 returnName = itemName.Replace("_lang", "_ch");
-            else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
-                returnName = itemName.Replace("_lang", "_sp");
+            //else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
+            //    returnName = itemName.Replace("_lang", "_sp");
             else if (LocalizeManager.Instance.Lang == SystemLanguage.Korean)
                 returnName = itemName.Replace("_lang", "_ko");
             else
@@ -392,7 +423,7 @@ public class ItemManager : MonoBehaviour
         string ItemName = _itemName.Replace("_ja", "_lang"); ;
         ItemName = ItemName.Replace("_en", "_lang");
         ItemName = ItemName.Replace("_ch", "_lang");
-        ItemName = ItemName.Replace("_sp", "_lang");
+        //ItemName = ItemName.Replace("_sp", "_lang");
         ItemName = ItemName.Replace("_ko", "_lang");
         return ItemName;
     }
@@ -403,20 +434,28 @@ public class ItemManager : MonoBehaviour
     //アプリ固有メソッド
     //*************************************************************************
 
-    /// <summary>
-    /// 
-    /// </summary>
-    private void TapBottle()
+    //
+    private void TapKatana()
     {
-        BtnBottle.SetActive(false);
+        BtnKatana.SetActive(false);
 
-        BlockPanel.Instance.ShowBlock();
-        AudioManager.Instance.SoundSE("PETCap");
-        ChangeBigImage("Bottle2");
+        AudioManager.Instance.SoundSE("Slide");
+        ChangeBigImage("Katana2");
+        ChangeItem("Katana1","Katana2");
 
+        SaveLoadSystem.Instance.Save();
+    }
 
+    //
+    private void TapMakimono1()
+    {
+        BtnMakimono1.SetActive(false);
 
-        //SaveLoadSystem.Instance.gameData.isClearBottle = true;
+        AudioManager.Instance.SoundSE("Clear");
+        ChangeBigImage("Makimono1_open");
+        ChangeItem("Makimono1", "Makimono1_open");
+
+        SaveLoadSystem.Instance.gameData.isClearMakimono1 = true;
         SaveLoadSystem.Instance.Save();
     }
 }

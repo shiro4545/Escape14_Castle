@@ -4,6 +4,8 @@ using GoogleMobileAds.Api;
 
 public class GoogleAds : MonoBehaviour
 {
+    public static GoogleAds Instance { get; private set; }
+
     //動画情報の取得有無
     public bool isGetMovie = true;
 
@@ -18,6 +20,7 @@ public class GoogleAds : MonoBehaviour
 
     public void Start()
     {
+        Instance = this;
     }
 
     public void AdsInitial()

@@ -18,9 +18,6 @@ public class HintManager : MonoBehaviour
     //現進捗で動画を視聴した回数
     private int CountWatch;
 
-    //広告オブジェクト
-    public GoogleAds GoogleAds;
-
     //ヒント親オブジェクト
     public GameObject Hint2;
     public GameObject Hint3;
@@ -57,6 +54,9 @@ public class HintManager : MonoBehaviour
     public Text[] BeforeTXTs;
     public GameObject[] BeforeTXTobjs;
 
+
+    //本編orおまけのヒントデータをセット
+    private HintData hintData;
 
     private GameData gameData;
 
@@ -96,11 +96,11 @@ public class HintManager : MonoBehaviour
     /// </summary>
     private void TapAds()
     {
-        if (GoogleAds.isGetMovie && !SaveLoadSystem.Instance.gameData.isPurchase)
-            GoogleAds.ShowReawrd();
+        if (GoogleAds.Instance.isGetMovie && !SaveLoadSystem.Instance.gameData.isPurchase)
+            GoogleAds.Instance.ShowReawrd();
         else
         {
-            GoogleAds.RequestReward();
+            GoogleAds.Instance.RequestReward();
             AfterWatch();
             ChangeImage();
         }
@@ -118,10 +118,16 @@ public class HintManager : MonoBehaviour
         //現進捗のヒントフラグを取得
         if (DebugMode)
             HintFlg = "1111";
+        else if (!SaveLoadSystem.Instance.gameData.isOmake)
+            HintFlg = SaveLoadSystem.Instance.gameData.HintFlgArray1[Progress];
         else
-            HintFlg = SaveLoadSystem.Instance.gameData.HintFlgArray[Progress];
+            HintFlg = SaveLoadSystem.Instance.gameData.HintFlgArray2[Progress];
 
-        HintData hintData = HintLoad.Instance.hintData;
+        //本編orおまけのヒントデータをセット
+        if (!SaveLoadSystem.Instance.gameData.isOmake)
+            hintData = HintLoad.Instance.hintData2;
+        else
+            hintData = HintLoad.Instance.hintData1;
 
         //ヒント1,2,3,4にテキストをセットする
         if(LocalizeManager.Instance.Lang == SystemLanguage.Japanese)
@@ -138,13 +144,13 @@ public class HintManager : MonoBehaviour
             HintTxt3.text = Repl(hintData.zh_CN.hint3[Progress]);
             HintTxt4.text = Repl(hintData.zh_CN.hint4[Progress]);
         }
-        else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
-        {
-            HintTxt1.text = Repl(hintData.es.hint1[Progress]);
-            HintTxt2.text = Repl(hintData.es.hint2[Progress]);
-            HintTxt3.text = Repl(hintData.es.hint3[Progress]);
-            HintTxt4.text = Repl(hintData.es.hint4[Progress]);
-        }
+        //else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
+        //{
+        //    HintTxt1.text = Repl(hintData.es.hint1[Progress]);
+        //    HintTxt2.text = Repl(hintData.es.hint2[Progress]);
+        //    HintTxt3.text = Repl(hintData.es.hint3[Progress]);
+        //    HintTxt4.text = Repl(hintData.es.hint4[Progress]);
+        //}
         else if (LocalizeManager.Instance.Lang == SystemLanguage.Korean)
         {
             HintTxt1.text = Repl(hintData.ko.hint1[Progress]);
@@ -195,7 +201,7 @@ public class HintManager : MonoBehaviour
 
         string ImageName;
 
-        if (GoogleAds.isGetMovie && !SaveLoadSystem.Instance.gameData.isPurchase)
+        if (GoogleAds.Instance.isGetMovie && !SaveLoadSystem.Instance.gameData.isPurchase)
         //取得成功時かつ未課金
         {
             //「動画広告を見る必要がある」オブジェ
@@ -209,8 +215,8 @@ public class HintManager : MonoBehaviour
                     txt.text = "ヒントを見るには動画広告を視聴する必要があります";
                 else if (LocalizeManager.Instance.Lang == SystemLanguage.Chinese || LocalizeManager.Instance.Lang == SystemLanguage.ChineseSimplified)
                     txt.text = "您必须观看广告视频才能看到提示.";
-                else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
-                    txt.text = "Debes ver el video del anuncio para ver el consejo.";
+                //else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
+                //    txt.text = "Debes ver el video del anuncio para ver el consejo.";
                 else if (LocalizeManager.Instance.Lang == SystemLanguage.Korean)
                     txt.text = "팁을 보려면 광고 동영상을 시청해야 합니다.";
                 else
@@ -223,8 +229,8 @@ public class HintManager : MonoBehaviour
                 ImageName = "02_UI/watch_ja";
             else if (LocalizeManager.Instance.Lang == SystemLanguage.Chinese || LocalizeManager.Instance.Lang == SystemLanguage.ChineseSimplified)
                 ImageName = "02_UI/watch_ch";
-            else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
-                ImageName = "02_UI/watch_sp";
+            //else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
+            //    ImageName = "02_UI/watch_sp";
             else if (LocalizeManager.Instance.Lang == SystemLanguage.Korean)
                 ImageName = "02_UI/watch_ko";
             else
@@ -272,9 +278,12 @@ public class HintManager : MonoBehaviour
         else if (CountWatch == 4)
             NewHintFlg = "1111";
 
-        SaveLoadSystem.Instance.gameData.HintFlgArray[Progress] = NewHintFlg;
-        SaveLoadSystem.Instance.Save();
+        if(!SaveLoadSystem.Instance.gameData.isOmake)
+            SaveLoadSystem.Instance.gameData.HintFlgArray1[Progress] = NewHintFlg;
+        else
+            SaveLoadSystem.Instance.gameData.HintFlgArray2[Progress] = NewHintFlg;
 
+        SaveLoadSystem.Instance.Save();
     }
 
 
@@ -298,7 +307,7 @@ public class HintManager : MonoBehaviour
             TxtObject2.SetActive(true);
 
             //ヒント3まである場合
-            if (HintLoad.Instance.hintData.ja.hint3[Progress].Length > 5) //5文字以上
+            if (hintData.ja.hint3[Progress].Length > 5) //5文字以上
                 Hint3.SetActive(true);
         }
         //ヒント3の動画を視聴済みの場合
@@ -308,7 +317,7 @@ public class HintManager : MonoBehaviour
             TxtObject3.SetActive(true);
 
             //ヒント4まである場合
-            if (HintLoad.Instance.hintData.ja.hint4[Progress].Length > 5) //5文字以上
+            if (hintData.ja.hint4[Progress].Length > 5) //5文字以上
                 Hint4.SetActive(true);
         }
         //ヒント4の動画を視聴済みの場合

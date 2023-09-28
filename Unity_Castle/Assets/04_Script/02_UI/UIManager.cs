@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour
 {
     //広告クラス
-    public GoogleAds Ads;
     public IDFA _IDFA;
 
     //Panelオブジェクト
@@ -162,7 +161,7 @@ public class UIManager : MonoBehaviour
         IDFAClass.Initial();
 
         //広告クラス初期化
-        Ads.AdsInitial();
+        GoogleAds.Instance.AdsInitial();
             
 
 
@@ -430,7 +429,7 @@ public class UIManager : MonoBehaviour
         if (!SaveLoadSystem.Instance.gameData.isPurchase
             && Application.platform == RuntimePlatform.IPhonePlayer
             && IAPiOSClass.IsInitialized())
-            //&& Ads.isGetMovie)
+            //&& GoogleAda.Instance.isGetMovie)
         {
             BtnHint_Back2.SetActive(true);
             BtnHint_ToPur.SetActive(true);
@@ -455,7 +454,7 @@ public class UIManager : MonoBehaviour
         MenuPanel.SetActive(false);
         SoundPanel.SetActive(true);
         //インタースティシャル広告
-        Ads.ShowInterstitialAd();
+        GoogleAds.Instance.ShowInterstitialAd();
     }
     //メニュー画面の「タイトルへ」ボタン
     private void OnTapTitle()
@@ -634,7 +633,7 @@ public class UIManager : MonoBehaviour
         GamePanel.SetActive(true);
 
         //if(SaveLoadSystem.Instance.gameData.isGetLetter)
-            //Ads.ShowInterstitialAd2(); //インタースティシャル動画
+            //Google.Instance.ShowInterstitialAd2(); //インタースティシャル動画
     }
 
     //IDFAの表示
@@ -906,8 +905,8 @@ public class UIManager : MonoBehaviour
         }
         else if (LocalizeManager.Instance.Lang == SystemLanguage.Chinese || LocalizeManager.Instance.Lang == SystemLanguage.ChineseSimplified)
             Lang1 = "_ch";
-        else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
-            Lang1 = "_sp";
+        //else if (LocalizeManager.Instance.Lang == SystemLanguage.Spanish)
+        //    Lang1 = "_sp";
         else if (LocalizeManager.Instance.Lang == SystemLanguage.Korean)
             Lang1 = "_ko";
         else

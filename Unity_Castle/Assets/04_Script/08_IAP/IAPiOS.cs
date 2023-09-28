@@ -15,7 +15,6 @@ public class IAPiOS : MonoBehaviour, IStoreListener
 	static string productNameAppleNonConsumable = "Item01";       // Apple App Store identifier for the non-consumable product.
 
 	public UIManager UI;
-	public GoogleAds Ads;
 
 	public enum PURCHASE_STATE
 	{
@@ -298,7 +297,7 @@ public class IAPiOS : MonoBehaviour, IStoreListener
 	//購入・復元成功時のゲーム処理
 	private void Success()
 	{
-		Ads.unRequestBanner();
+		GoogleAds.Instance.unRequestBanner();
 		UI.SpinnerPanel.SetActive(false);
 		UI.PurchasePanel.SetActive(false);
 		SaveLoadSystem.Instance.gameData.isPurchase = true;

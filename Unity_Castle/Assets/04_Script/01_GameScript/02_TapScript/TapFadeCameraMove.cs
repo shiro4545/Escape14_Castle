@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TapFadeCameraMove : TapCollider
 {
-    public string MovePositionName;
+    public string[] MovePositionName;
 
     protected override void OnTap()
     {

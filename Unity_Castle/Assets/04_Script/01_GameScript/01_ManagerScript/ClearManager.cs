@@ -7,6 +7,9 @@ using Google.Play.Review;
 
 public class ClearManager : MonoBehaviour
 {
+
+    public static ClearManager Instance { get; private set; }
+
     //脱出成功フラグ
     public bool isClear;
 
@@ -30,9 +33,14 @@ public class ClearManager : MonoBehaviour
     public GameObject ForEnd;
     public GameObject NotEnd;
 
+    // Start is called before the first frame update
+    void Start()
+    {
+        Instance = this;
+    }
 
-    //脱出演出
-    public void Escape()
+        //脱出演出
+        public void Escape()
     {
         //クリアオブジェクトの表示・非表示
         ForEnd.SetActive(true);
