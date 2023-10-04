@@ -21,6 +21,8 @@ public class ItemManager : MonoBehaviour
     //特定アイテムでの透明ボタン
     public GameObject BtnKatana;
     public GameObject BtnMakimono1;
+    public GameObject BtnArrow1;
+    public GameObject BtnYa;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +46,14 @@ public class ItemManager : MonoBehaviour
         BtnMakimono1.GetComponent<Button>().onClick.AddListener(() =>
         {
             TapMakimono1();
+        });
+        BtnArrow1.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            TapArrow1();
+        });
+        BtnYa.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            TapYa();
         });
     }
 
@@ -93,11 +103,11 @@ public class ItemManager : MonoBehaviour
             SaveLoadSystem.Instance.gameData.isGetMakimono2 = true;
         else if (itemName == "Ya")
             SaveLoadSystem.Instance.gameData.isGetYa = true;
-        else if (itemName == "Arrow")
+        else if (itemName == "Arrow1")
             SaveLoadSystem.Instance.gameData.isGetArrow = true;
         else if (itemName == "Kuwa")
             SaveLoadSystem.Instance.gameData.isGetKuwa = true;
-        else if (itemName == "Oke")
+        else if (itemName == "Oke1")
             SaveLoadSystem.Instance.gameData.isGetOke = true;
 
         SaveLoadSystem.Instance.gameData.getItems += itemName + ";";
@@ -185,12 +195,19 @@ public class ItemManager : MonoBehaviour
 
         //透明ボタンを非表示
         BtnKatana.SetActive(false);
+        BtnMakimono1.SetActive(false);
+        BtnArrow1.SetActive(false);
+        BtnYa.SetActive(false);
 
         //透明ボタン表示
         if (SelectItem == "Katana1")
             BtnKatana.SetActive(true);
          else if (SelectItem == "Makimono1")
             BtnMakimono1.SetActive(true);
+        else if (SelectItem == "Arrow1")
+            BtnArrow1.SetActive(true);
+        else if (SelectItem == "Ya")
+            BtnYa.SetActive(true);
 
     }
 
@@ -456,6 +473,41 @@ public class ItemManager : MonoBehaviour
         ChangeItem("Makimono1", "Makimono1_open");
 
         SaveLoadSystem.Instance.gameData.isClearMakimono1 = true;
+        SaveLoadSystem.Instance.Save();
+    }
+
+    //
+    private void TapArrow1()
+    {
+        if (SelectItem != "Ya")
+            return;
+
+        BtnArrow1.SetActive(false);
+        UseItem();
+
+        AudioManager.Instance.SoundSE("Clear");
+        ChangeBigImage("Arrow2");
+        ChangeItem("Arrow1", "Arrow2");
+        ChangeSelect("Arrow2");
+
+        SaveLoadSystem.Instance.gameData.isClearArrow = true;
+        SaveLoadSystem.Instance.Save();
+    }
+    //
+    private void TapYa()
+    {
+        if (SelectItem != "Arrow1")
+            return;
+
+        BtnYa.SetActive(false);
+        UseItem();
+
+        AudioManager.Instance.SoundSE("Clear");
+        ChangeBigImage("Arrow2");
+        ChangeItem("Ya", "Arrow2");
+        ChangeSelect("Arrow2");
+
+        SaveLoadSystem.Instance.gameData.isClearArrow = true;
         SaveLoadSystem.Instance.Save();
     }
 }

@@ -77,6 +77,22 @@ public class CameraManager : MonoBehaviour
     public Paper_Judge Paper;
     public Paper_Tap[] PaperAr;
 
+    public Buki_Judge Buki;
+
+    public Animal_Judge Animal;
+    public Animal_Tap[] AnimalAr;
+
+    public Syuri_Judge Syuri;
+
+    public Window3_Tap Win3;
+
+    public View_Judge View;
+    public View_Tap[] ViewAr;
+
+    public WinBtn_Judge WinBtn;
+    public WinBtn_Tap[] WinBtnAr;
+
+    public MatoBtn_Judge MatoBtn;
 
     //<summary>
     //全カメラ位置情報
@@ -1314,6 +1330,18 @@ public class CameraManager : MonoBehaviour
                 ResetSensuBtn();
             else if (CurrentPositionName == "Paper")
                 ResetPaper();
+            else if (CurrentPositionName == "Buki")
+                ResetBuki();
+            else if (CurrentPositionName == "Animal")
+                ResetAnimal();
+            else if (CurrentPositionName == "Syuriken")
+                ResetSyuriken();
+            else if (CurrentPositionName == "ViewBtn")
+                ResetView();
+            else if (CurrentPositionName == "WindowBtn")
+                ResetWinBtn();
+            else if (CurrentPositionName == "ArrowBtn")
+                ResetMatoBtn();
 
             ChangeCameraPosition(CameraPositionInfoes[CurrentPositionName].MoveNames.Back);
 
@@ -1358,6 +1386,10 @@ public class CameraManager : MonoBehaviour
             CurrentPositionName = positionName;
         }
 
+        if (positionName == "3F")
+            InWin3();
+        else if (positionName == "OutShiro")
+            OutWin3();
 
         GetComponent<Camera>().transform.position = CameraPositionInfoes[CurrentPositionName].Position;
         GetComponent<Camera>().transform.rotation = Quaternion.Euler(CameraPositionInfoes[CurrentPositionName].Rotate);
@@ -1432,6 +1464,8 @@ public class CameraManager : MonoBehaviour
         {
             if(obj.EnableCameraPositionName == CurrentPositionName)
             {
+                
+
                 obj.gameObject.SetActive(true);
             }
             else
@@ -1441,6 +1475,12 @@ public class CameraManager : MonoBehaviour
         {
             if (obj.EnableCameraPositionName == CurrentPositionName)
             {
+                if (!SaveLoadSystem.Instance.gameData.isOmake)
+                {
+                    if (CurrentPositionName == "3F" && !SaveLoadSystem.Instance.gameData.isClearChain)
+                        continue;
+                }
+
                 obj.gameObject.SetActive(true);
             }
             else
@@ -1572,6 +1612,135 @@ public class CameraManager : MonoBehaviour
                 btn.SetActive(false);
             tap.Btns[0].SetActive(true);
         }
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetBuki()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearBuki)
+            return;
+
+        foreach (var tap in Buki.Selects)
+        {
+            foreach (var btn in tap.Bukis)
+                btn.SetActive(false);
+        }
+        Buki.Defs[Buki.Idx].Bukis[Buki.status].SetActive(true);
+        Buki.Idx = 0;
+        Buki.status = 0;
+        Buki.oldIdx = 9;
+        Buki.oldStatus = 0;
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetAnimal()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearByobu1
+            && SaveLoadSystem.Instance.gameData.isClearByobu2
+            && SaveLoadSystem.Instance.gameData.isClearByobu3)
+            return;
+
+        Animal.Status = "000";
+        foreach (var tap in AnimalAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetSyuriken()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearSyuriken)
+            return;
+
+        Syuri.SetsArray[Syuri.TapNewIdx].Sets[Syuri.Status[Syuri.TapNewIdx].Length - 1].Syurikens[Syuri.NewStatus].SetActive(true);
+        Syuri.Selects[Syuri.TapNewIdx].Syurikens[Syuri.NewStatus].SetActive(false);
+        Syuri.TapNewIdx = 0;
+        Syuri.TapOldIdx = 9;
+        Syuri.NewStatus = 9;
+        Syuri.OldStatus = 9;
+    }
+
+    /// <summary>
+    /// 3階の窓の見え方調整
+    /// </summary>
+    private void InWin3()
+    {
+        if (!SaveLoadSystem.Instance.gameData.isClearWindow3)
+            return;
+
+        Win3.Wall_in.SetActive(false);
+        Win3.Open_in.SetActive(true);
+    }
+    //
+    private void OutWin3()
+    {
+        if (!SaveLoadSystem.Instance.gameData.isClearWindow3)
+            return;
+
+        Win3.Wall_in.SetActive(true);
+        Win3.Open_in.SetActive(false);
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetView()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearWindow4)
+            return;
+
+        View.Status = "000";
+        foreach (var tap in ViewAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetWinBtn()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearWindow2
+            && SaveLoadSystem.Instance.gameData.isClearWindow3
+            && SaveLoadSystem.Instance.gameData.isClearWindow4)
+            return;
+
+        WinBtn.Status = "000";
+        foreach (var tap in WinBtnAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetMatoBtn()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearMato)
+            return;
+
+        MatoBtn.Status = "00";
+        foreach (var btn in MatoBtn.Btns0)
+            btn.SetActive(false);
+        MatoBtn.Btns0[0].SetActive(true);
+        foreach (var btn in MatoBtn.Btns1)
+            btn.SetActive(false);
+        MatoBtn.Btns1[0].SetActive(true);
     }
 
 }

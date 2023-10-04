@@ -46,13 +46,20 @@ public class GameData
     public bool isClearManji; //22
     public bool isClearBuki; //23
     public bool isClearKasa; //24
+    public bool isClearByobu1; //25
+    public bool isClearByobu2; //25
+    public bool isClearByobu3; //25
     public bool isClearAnimal; //25
     public bool isClearSyuriken; //26
     public bool isClearChain; //27
-    public bool isClearView; //28
-    public bool isClearWindow; //29,30
-    public bool isClearArrow; //31,32
-    public bool isClearMato; //33
+    public bool isClearWindow2; //28
+    public bool isClearWindow3; //28
+    public bool isClearWindow4; //28
+    public bool isClearView; //29
+    public bool isClearWindowBtn; //30
+    public bool isClearArrow; //31
+    public bool isClearMato; //32
+    public bool isClearMatoBtn; //33
     public bool isClearOke; //34
     public bool isClearNotFire; //35
     public bool isClearClean; //35
@@ -69,6 +76,7 @@ public class GameData
 
     //オブジェクト状態
     public string StatusSensu = "0000";
+    public string[] StatusSyuri = new string[] { "213", "", "" };
 
 
     //**以下、全脱出共通のため編集不可****************************

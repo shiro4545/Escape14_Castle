@@ -55,6 +55,35 @@ public class StartResetManager : MonoBehaviour
     //21 null
     //22
     public Manji_Judge Manji;
+    //23
+    public Buki_Judge Buki;
+    //24
+    public Kasa_Judge Kasa;
+    public Kasa_Tap[] KasaAr;
+    //25
+    public Byobu_Tap[] ByobuAr;
+    public Animal_Judge Animal;
+    public Animal_Tap[] AnimalAr;
+    //26
+    public Syuri_Judge Syuri;
+    //27
+    public Chain_Tap Chain;
+    //28
+    public Window2_Tap Win2;
+    public Window3_Tap Win3;
+    public Window4_Tap Win4;
+    //29
+    public View_Judge View;
+    public View_Tap[] ViewAr;
+    //30
+    public WinBtn_Judge WinBtn;
+    public WinBtn_Tap[] WinBtnAr;
+    //31 null
+    //32
+    public Mato_Tap Mato;
+    //33
+    public MatoBtn_Judge MatoBtn;
+
 
     //クリアクラス
     public ClearManager Clear;
@@ -227,6 +256,152 @@ public class StartResetManager : MonoBehaviour
         Manji.Status = "00000";
         Manji.Before.SetActive(true);
         Manji.After.SetActive(false);
+
+        //23
+        Buki.Status = "12300";
+        Buki.Idx = 0;
+        Buki.status = 0;
+        Buki.oldIdx = 9;
+        Buki.oldStatus = 0;
+        Buki.Before.SetActive(true);
+        Buki.After.SetActive(false);
+        Buki.Syuriken1.SetActive(false);
+        foreach (var tap in Buki.Defs)
+        {
+            foreach (var btn in tap.Bukis)
+                btn.SetActive(false);
+        }
+        Buki.Defs[0].Bukis[1].SetActive(true);
+        Buki.Defs[1].Bukis[2].SetActive(true);
+        Buki.Defs[2].Bukis[3].SetActive(true);
+        Buki.Defs[3].Bukis[0].SetActive(true);
+        Buki.Defs[4].Bukis[0].SetActive(true);
+        foreach (var tap in Buki.Selects)
+        {
+            foreach (var btn in tap.Bukis)
+                btn.SetActive(false);
+        }
+
+        //24
+        Kasa.Status = "000";
+        Kasa.Before.SetActive(true);
+        Kasa.After.SetActive(false);
+        Kasa.Syuriken2.SetActive(false);
+        foreach (var tap in KasaAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+
+        //25
+        foreach (var tap in ByobuAr)
+        {
+            tap.Close.SetActive(true);
+            tap.Open.SetActive(false);
+        }
+
+        Animal.Status = "000";
+        Animal.Before.SetActive(true);
+        Animal.After.SetActive(false);
+        Animal.Syuriken3.SetActive(false);
+        foreach (var tap in AnimalAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+
+        //26
+        Syuri.Before.SetActive(true);
+        Syuri.After.SetActive(false);
+        Syuri.Key2.SetActive(false);
+        Syuri.TapNewIdx = 0;
+        Syuri.TapOldIdx = 9;
+        Syuri.NewStatus = 9;
+        Syuri.OldStatus = 9;
+
+        foreach(var obj in Syuri.Selects)
+        {
+            foreach (var syuriken in obj.Syurikens)
+                syuriken.SetActive(false);
+        }
+
+        foreach (var obj in Syuri.SetsArray)
+        {
+            foreach (var Set in obj.Sets)
+            {
+                foreach (var syuriken in Set.Syurikens)
+                    syuriken.SetActive(false);
+            }
+        }
+
+        Syuri.SetsArray[0].Sets[0].Syurikens[3].SetActive(true);
+        Syuri.SetsArray[0].Sets[1].Syurikens[1].SetActive(true);
+        Syuri.SetsArray[0].Sets[2].Syurikens[2].SetActive(true);
+
+        //27
+        Chain.Def.SetActive(true);
+        Chain.Close.SetActive(true);
+        Chain.Open.SetActive(false);
+
+        //28
+        Win2.Close.SetActive(true);
+        Win2.Open.SetActive(false);
+
+        Win3.Close_in.SetActive(true);
+        Win3.Close_out.SetActive(true);
+        Win3.Open_in.SetActive(false);
+        Win3.Open_out.SetActive(false);
+        Win3.Wall_in.SetActive(true);
+
+        Win4.Close.SetActive(true);
+        Win4.Open.SetActive(false);
+
+        //29
+        View.Status = "000";
+        View.Before.SetActive(true);
+        View.After.SetActive(false);
+        View.Arrow.SetActive(false);
+        foreach (var tap in ViewAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+
+        //30
+        WinBtn.Status = "000";
+        WinBtn.Before.SetActive(true);
+        WinBtn.After.SetActive(false);
+        WinBtn.Ya.SetActive(false);
+        foreach (var tap in WinBtnAr)
+        {
+            foreach (var btn in tap.Btns)
+                btn.SetActive(false);
+            tap.Btns[0].SetActive(true);
+        }
+
+        //31 null
+
+        //32
+        Mato.Ya1.SetActive(false);
+        Mato.Ya2.SetActive(false);
+
+        //33
+        MatoBtn.Status = "00";
+        MatoBtn.Before.SetActive(true);
+        MatoBtn.After.SetActive(false);
+        MatoBtn.Oke.SetActive(false);
+        MatoBtn.Kuwa.SetActive(false);
+        foreach (var btn in MatoBtn.Btns0)
+            btn.SetActive(false);
+        MatoBtn.Btns0[0].SetActive(true);
+        foreach (var btn in MatoBtn.Btns1)
+            btn.SetActive(false);
+        MatoBtn.Btns1[0].SetActive(true);
+
+
 
         //35 null
 
@@ -421,6 +596,188 @@ public class StartResetManager : MonoBehaviour
         }
 
         //23
+        if (gameData.isClearBuki)
+        {
+            Buki.Before.SetActive(false);
+            Buki.After.SetActive(true);
+            Buki.Syuriken1.SetActive(true);
+            foreach (var tap in Buki.Defs)
+            {
+                foreach (var btn in tap.Bukis)
+                    btn.SetActive(false);
+            }
+            Buki.Defs[0].Bukis[0].SetActive(true);
+            Buki.Defs[1].Bukis[3].SetActive(true);
+            Buki.Defs[2].Bukis[1].SetActive(true);
+            Buki.Defs[3].Bukis[0].SetActive(true);
+            Buki.Defs[4].Bukis[2].SetActive(true);
+        }
+        if (gameData.isGetSyuriken1) 
+            Buki.Syuriken1.SetActive(false);
+
+        //24
+        if (gameData.isClearKasa)
+        {
+            Kasa.Before.SetActive(false);
+            Kasa.After.SetActive(true);
+            Kasa.Syuriken2.SetActive(true);
+            foreach (var tap in KasaAr)
+                tap.Btns[0].SetActive(false);
+
+            KasaAr[0].Btns[2].SetActive(true);
+            KasaAr[1].Btns[1].SetActive(true);
+            KasaAr[2].Btns[3].SetActive(true);
+        }
+        if(gameData.isGetSyuriken2)
+            Kasa.Syuriken2.SetActive(false);
+
+        //25
+        if (gameData.isClearByobu1)
+        {
+            ByobuAr[0].Close.SetActive(false);
+            ByobuAr[0].Open.SetActive(true);
+        }
+        if (gameData.isClearByobu2)
+        {
+            ByobuAr[1].Close.SetActive(false);
+            ByobuAr[1].Open.SetActive(true);
+        }
+        if (gameData.isClearByobu3)
+        {
+            ByobuAr[2].Close.SetActive(false);
+            ByobuAr[2].Open.SetActive(true);
+        }
+
+        if (gameData.isClearAnimal)
+        {
+            Animal.Before.SetActive(false);
+            Animal.After.SetActive(true);
+            Animal.Syuriken3.SetActive(true);
+            foreach (var tap in AnimalAr)
+                tap.Btns[0].SetActive(false);
+
+            AnimalAr[0].Btns[2].SetActive(true);
+            AnimalAr[1].Btns[1].SetActive(true);
+            AnimalAr[2].Btns[3].SetActive(true);
+        }
+        if(gameData.isGetSyuriken3)
+            Animal.Syuriken3.SetActive(false);
+
+        //26
+        foreach (var obj in Syuri.SetsArray)
+        {
+            foreach (var Set in obj.Sets)
+            {
+                foreach (var syuriken in Set.Syurikens)
+                    syuriken.SetActive(false);
+            }
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            for(int j = 0; j < gameData.StatusSyuri[i].Length; j++)
+            {
+                Syuri.SetsArray[i].Sets[gameData.StatusSyuri[i].Length - 1 - j].Syurikens[int.Parse(gameData.StatusSyuri[i].Substring(j, 1))].SetActive(true);
+            }
+        }
+
+        if (gameData.isClearSyuriken)
+        {
+            Syuri.Before.SetActive(false);
+            Syuri.After.SetActive(true);
+            Syuri.Key2.SetActive(true);
+        }
+        if(gameData.isGetKey2)
+            Syuri.Key2.SetActive(false);
+
+        //27
+        if (gameData.isClearChain)
+        {
+            Chain.Def.SetActive(false);
+            Chain.Close.SetActive(false);
+            Chain.Open.SetActive(true);
+        }
+
+        //28
+        if (gameData.isClearWindow2)
+        {
+            Win2.Close.SetActive(false);
+            Win2.Open.SetActive(true);
+        }
+
+        if (gameData.isClearWindow3)
+        {
+            Win3.Close_in.SetActive(false);
+            Win3.Close_out.SetActive(false);
+            Win3.Open_out.SetActive(true);
+        }
+
+        if (gameData.isClearWindow4)
+        {
+            Win4.Close.SetActive(false);
+            Win4.Open.SetActive(true);
+        }
+
+        //29
+        if (gameData.isClearView)
+        {
+            View.Before.SetActive(false);
+            View.After.SetActive(true);
+            View.Arrow.SetActive(true);
+            foreach (var tap in ViewAr)
+                tap.Btns[0].SetActive(false);
+
+            ViewAr[0].Btns[7].SetActive(true);
+            ViewAr[1].Btns[4].SetActive(true);
+            ViewAr[2].Btns[6].SetActive(true);
+        }
+        if (gameData.isGetArrow)
+            View.Arrow.SetActive(false);
+
+        //30
+        if (gameData.isClearWindowBtn)
+        {
+            WinBtn.Before.SetActive(false);
+            WinBtn.After.SetActive(true);
+            WinBtn.Ya.SetActive(true);
+            foreach (var tap in WinBtnAr)
+                tap.Btns[0].SetActive(false);
+
+            WinBtnAr[0].Btns[4].SetActive(true);
+            WinBtnAr[1].Btns[1].SetActive(true);
+            WinBtnAr[2].Btns[3].SetActive(true);
+        }
+        if (gameData.isGetYa)
+            WinBtn.Ya.SetActive(false);
+
+        //31 null
+
+        //32
+        if (gameData.isClearMato)
+        {
+            Mato.Ya1.SetActive(true);
+            Mato.Ya2.SetActive(true);
+        }
+
+        //33
+        if (gameData.isClearMatoBtn)
+        {
+            MatoBtn.Before.SetActive(false);
+            MatoBtn.After.SetActive(true);
+            MatoBtn.Oke.SetActive(true);
+            MatoBtn.Kuwa.SetActive(true);
+
+            MatoBtn.Btns0[0].SetActive(false);
+            MatoBtn.Btns1[0].SetActive(false);
+            MatoBtn.Btns0[7].SetActive(true);
+            MatoBtn.Btns1[1].SetActive(true);
+        }
+        if(gameData.isGetKuwa)
+            MatoBtn.Kuwa.SetActive(false);
+        if (gameData.isGetOke)
+            MatoBtn.Oke.SetActive(false);
+
+
+
 
 
 
