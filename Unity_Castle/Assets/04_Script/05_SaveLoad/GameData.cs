@@ -69,14 +69,16 @@ public class GameData
     public bool isClearDoll4; //36
     public bool isClearMap; //37
     public bool isClearKuwa; //38
-    public bool isClearMakimono2; //39,40
+    public bool isClearMakimono2_open; //39
+    public bool isClearMakimono2; //40
     public bool isClearSensu2; //41
-    public bool isClearDoukutsu; //42
+    public bool isClearDoukutsu; //42 ヒントではisGetKey3を使う
     public bool isClearAll; //43
 
     //オブジェクト状態
     public string StatusSensu = "0000";
     public string[] StatusSyuri = new string[] { "213", "", "" };
+    public bool isOpenBox;
 
 
     //**以下、全脱出共通のため編集不可****************************

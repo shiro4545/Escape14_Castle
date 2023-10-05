@@ -23,6 +23,7 @@ public class ItemManager : MonoBehaviour
     public GameObject BtnMakimono1;
     public GameObject BtnArrow1;
     public GameObject BtnYa;
+    public GameObject BtnMakimono2;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +55,10 @@ public class ItemManager : MonoBehaviour
         BtnYa.GetComponent<Button>().onClick.AddListener(() =>
         {
             TapYa();
+        });
+        BtnMakimono2.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            TapMakimono2();
         });
     }
 
@@ -198,6 +203,7 @@ public class ItemManager : MonoBehaviour
         BtnMakimono1.SetActive(false);
         BtnArrow1.SetActive(false);
         BtnYa.SetActive(false);
+        BtnMakimono2.SetActive(false);
 
         //透明ボタン表示
         if (SelectItem == "Katana1")
@@ -208,6 +214,8 @@ public class ItemManager : MonoBehaviour
             BtnArrow1.SetActive(true);
         else if (SelectItem == "Ya")
             BtnYa.SetActive(true);
+        else if (SelectItem == "Makimono2")
+            BtnMakimono2.SetActive(true);
 
     }
 
@@ -473,6 +481,18 @@ public class ItemManager : MonoBehaviour
         ChangeItem("Makimono1", "Makimono1_open");
 
         SaveLoadSystem.Instance.gameData.isClearMakimono1 = true;
+        SaveLoadSystem.Instance.Save();
+    }
+    //
+    private void TapMakimono2()
+    {
+        BtnMakimono2.SetActive(false);
+
+        AudioManager.Instance.SoundSE("Clear");
+        ChangeBigImage("Makimono2_open1");
+        ChangeItem("Makimono2", "Makimono2_open1");
+
+        SaveLoadSystem.Instance.gameData.isClearMakimono2_open = true;
         SaveLoadSystem.Instance.Save();
     }
 

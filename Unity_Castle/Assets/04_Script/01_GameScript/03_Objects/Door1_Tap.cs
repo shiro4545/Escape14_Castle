@@ -53,7 +53,7 @@ public class Door1_Tap : TapCollider
     }
     private void After3()
     {
-        AudioManager.Instance.SoundSE("OpenShelf");
+        AudioManager.Instance.SoundSE("OpenShelf3");
         Close.SetActive(false);
         Open.SetActive(true);
         Invoke(nameof(After4), 1.5f);

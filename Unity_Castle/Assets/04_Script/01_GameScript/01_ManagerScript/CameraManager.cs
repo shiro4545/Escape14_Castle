@@ -94,6 +94,10 @@ public class CameraManager : MonoBehaviour
 
     public MatoBtn_Judge MatoBtn;
 
+    public Map_Judge Map;
+
+    public Doukutsu_Judge Doukutsu;
+
     //<summary>
     //全カメラ位置情報
     //</summary>
@@ -791,6 +795,17 @@ public class CameraManager : MonoBehaviour
         },
         //====洞窟派生==============
         {
+            "Hashigo",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(213.6512f,8.0681f,94.9328f),
+                Rotate =new Vector3(35,90,0),
+                MoveNames=new MoveNames
+                {
+                },
+            }
+        },
+        {
             "Doukutsu1",//
             new CameraPositionInfo
             {
@@ -806,10 +821,11 @@ public class CameraManager : MonoBehaviour
             "Doukutsu2",//
             new CameraPositionInfo
             {
-               Position=new Vector3(182.499f,10.042f,62.809f),
+               Position=new Vector3(189.369f,10.042f,62.809f),
                 Rotate =new Vector3(6,180,0),
                 MoveNames=new MoveNames
                 {
+                    Back = "Kamado"
                 },
             }
         },
@@ -1342,6 +1358,10 @@ public class CameraManager : MonoBehaviour
                 ResetWinBtn();
             else if (CurrentPositionName == "ArrowBtn")
                 ResetMatoBtn();
+            else if (CurrentPositionName == "Map")
+                ResetMap();
+            else if (CurrentPositionName == "Doukutsu1")
+                ResetDoukutsu();
 
             ChangeCameraPosition(CameraPositionInfoes[CurrentPositionName].MoveNames.Back);
 
@@ -1741,6 +1761,41 @@ public class CameraManager : MonoBehaviour
         foreach (var btn in MatoBtn.Btns1)
             btn.SetActive(false);
         MatoBtn.Btns1[0].SetActive(true);
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetMap()
+    {
+        if (SaveLoadSystem.Instance.gameData.isClearDoll2
+            && SaveLoadSystem.Instance.gameData.isClearDoll3
+            && SaveLoadSystem.Instance.gameData.isClearDoll4)
+            return;
+
+
+        foreach (var obj in Map.Picks)
+        {
+            obj.Close.SetActive(true);
+            obj.Open.SetActive(false);
+        }
+        foreach (var obj in Map.Sets)
+        {
+            foreach (var btn in obj.Peaces)
+                btn.SetActive(false);
+        }
+
+        Map.Status = "99999999";
+        Map.oldIdx = 9;
+    }
+
+    /// <summary>
+    /// ボタンの表示をリセット　
+    /// </summary>
+    private void ResetDoukutsu()
+    {
+        Doukutsu.Mark.SetActive(true);
+        Doukutsu.Status = "999";
     }
 
 }

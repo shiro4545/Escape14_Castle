@@ -62,7 +62,7 @@ public class Kamado_Tap : TapCollider
         {
             BlockPanel.Instance.ShowBlock();
             ItemManager.Instance.UseItem();
-            AudioManager.Instance.SoundSE("Fire");
+            AudioManager.Instance.SoundSE("Water5");
             Act_Oke.SetActive(true);
 
             Invoke(nameof(After3_1), 1.5f);
@@ -98,7 +98,7 @@ public class Kamado_Tap : TapCollider
         //35 地下へ
         if (SaveLoadSystem.Instance.gameData.isClearOpen)
         {
-            FadeManager.Instance.FadeChangePositon(new string[] { "Doukutsu1" });
+            FadeManager.Instance.FadeChangePositon(new string[] { "Hashigo","Doukutsu1" });
             return;
         }
 

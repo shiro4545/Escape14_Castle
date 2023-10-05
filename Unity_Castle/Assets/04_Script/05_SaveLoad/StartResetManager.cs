@@ -83,6 +83,24 @@ public class StartResetManager : MonoBehaviour
     public Mato_Tap Mato;
     //33
     public MatoBtn_Judge MatoBtn;
+    //34 null
+    //35 null
+    //36
+    public Doll2_Tap Doll2;
+    public Doll3_Tap Doll3;
+    public Doll4_Tap Doll4;
+    //37
+    public Map_Judge Map;
+    //38
+    public Sand_Tap Sand;
+    //39 null
+    //40 null
+    //41 null
+    //42
+    public Doukutsu_Judge Doukutsu;
+    public Box_Tap Box;
+    //43
+    public LastDoor_Tap LastDoor;
 
 
     //クリアクラス
@@ -401,11 +419,53 @@ public class StartResetManager : MonoBehaviour
             btn.SetActive(false);
         MatoBtn.Btns1[0].SetActive(true);
 
-
-
+        //34 null
         //35 null
 
+        //36
+        Doll2.Before.SetActive(true);
+        Doll2.After.SetActive(false);
+        Doll4.Before.SetActive(true);
+        Doll4.After.SetActive(false);
+
+        //37
+        Map.Status = "99999999";
+        Map.oldIdx = 9;
+        Map.Before.SetActive(true);
+        Map.Batsu.SetActive(false);
+        Map.After.SetActive(false);
+
+        foreach (var obj in Map.Picks)
+        {
+            obj.Close.SetActive(true);
+            obj.Open.SetActive(false);
+        }
+        foreach (var obj in Map.Sets)
+        {
+            foreach (var btn in obj.Peaces)
+                btn.SetActive(false);
+        }
+
+        //38
+        Sand.Def.SetActive(true);
+
+        //39 null
+        //40 null
         //41 null
+
+        //42
+        Doukutsu.Status = "999";
+        Doukutsu.Mark.SetActive(true);
+
+        Box.Close.SetActive(true);
+        Box.Open.SetActive(false);
+        Box.Key3.SetActive(false);
+
+        //43
+        LastDoor.Def.SetActive(true);
+        LastDoor.Close.SetActive(true);
+        LastDoor.Open.SetActive(false);
+
 
         //クリア
         Clear.ClearImage.transform.localScale = new Vector3(0, 0, 1);
@@ -776,12 +836,7 @@ public class StartResetManager : MonoBehaviour
         if (gameData.isGetOke)
             MatoBtn.Oke.SetActive(false);
 
-
-
-
-
-
-
+        //34
 
         //35
         if (gameData.isClearNotFire)
@@ -800,8 +855,58 @@ public class StartResetManager : MonoBehaviour
             Kamado.Open.SetActive(true);
         }
 
+        //36
+        if (gameData.isClearDoll2)
+        {
+            Doll2.Before.SetActive(false);
+            Doll2.After.SetActive(true);
+        }
+        if (gameData.isClearDoll4)
+        {
+            Doll4.Before.SetActive(false);
+            Doll4.After.SetActive(true);
+        }
 
+        //37
+        if (gameData.isClearMap)
+        {
+            Map.Before.SetActive(false);
+            Map.Batsu.SetActive(true);
+            Map.After.SetActive(true);
+
+            foreach (var obj in Map.Picks)
+                obj.Close.SetActive(false);
+
+            Map.Sets[0].Peaces[2].SetActive(true);
+            Map.Sets[1].Peaces[0].SetActive(true);
+            Map.Sets[5].Peaces[3].SetActive(true);
+            Map.Sets[7].Peaces[1].SetActive(true);
+        }
+
+        //38
+        if (gameData.isClearKuwa)
+        {
+            Sand.Def.SetActive(false);
+            Sand.Makimono2.SetActive(true);
+        }
+        if(gameData.isGetMakimono2)
+            Sand.Makimono2.SetActive(false);
+
+        //39 null
+        //40 null
         //41 null
+
+        //42
+        if (gameData.isOpenBox)
+        {
+            Box.Close.SetActive(false);
+            Box.Open.SetActive(true);
+            Box.Key3.SetActive(true);
+        }
+        if(gameData.isGetKey3)
+            Box.Key3.SetActive(false);
+
+        //43 All
 
         //アイテム
         //保有アイテム
