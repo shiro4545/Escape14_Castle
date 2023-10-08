@@ -69,6 +69,10 @@ public class SaveLoadSystem
         bool _isPurchase = gameData.isPurchase;
         float _volueBGM = gameData.VolumeBGM;
         float _volueSE = gameData.VolumeSE;
+        bool _isClear = gameData.isClear;
+        int _omakeCnt = gameData.OmakeCnt;
+        string _omakeStatus = gameData.OmakeStatus;
+        string[] _hintFlgArray2 = gameData.HintFlgArray2;
 
         //ゲームデータを初期化
         gameData = new GameData();
@@ -77,6 +81,10 @@ public class SaveLoadSystem
         gameData.isPurchase = _isPurchase;
         gameData.VolumeBGM = _volueBGM;
         gameData.VolumeSE = _volueSE;
+        gameData.isClear = _isClear;
+        gameData.OmakeCnt = _omakeCnt;
+        gameData.OmakeStatus = _omakeStatus;
+        gameData.HintFlgArray2 = _hintFlgArray2;
 
         //初期データをセーブデータに保存
         Save();

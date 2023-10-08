@@ -24,6 +24,8 @@ public class Sand_Tap : TapCollider
         {
             Makimono2.SetActive(false);
             ItemManager.Instance.GetItem("Makimono2");
+            Invoke(nameof(AfterGet), 0.4f);
+
         }
         else if (ItemManager.Instance.SelectItem == "Kuwa")
         {
@@ -65,6 +67,12 @@ public class Sand_Tap : TapCollider
         Act2.SetActive(false);
         Def.SetActive(false);
         Makimono2.SetActive(true);
+        BlockPanel.Instance.HideBlock();
+    }
+    //
+    private void AfterGet()
+    {
+        GoogleAds.Instance.ShowInterstitialAd2();
         BlockPanel.Instance.HideBlock();
     }
 }

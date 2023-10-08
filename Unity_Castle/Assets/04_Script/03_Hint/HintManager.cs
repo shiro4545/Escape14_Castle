@@ -364,17 +364,102 @@ public class HintManager : MonoBehaviour
         //インスタンスを代入(ソース短縮化のため)
         gameData = SaveLoadSystem.Instance.gameData;
 
-        //進捗
         int progress = 1;
 
-        //進捗算出
-        //if (!gameData.isClearxx)
-        //    progress = 1;
-        //else if (!gameData.isClear)
-        //    progress = 2;
-        //else
-        //    progress = 39;
+        //本編の進捗
+        if (!gameData.isOmake)
+        {
 
+            //進捗算出
+            if (!gameData.isClearTea)
+                progress = 1;
+            //2
+            else if (!gameData.isClearTansu)
+                progress = 3;
+            //4
+            else if (!gameData.isClearRousoku)
+                progress = 5;
+            else if (!gameData.isClearTatami)
+                progress = 6;
+            else if (!gameData.isClearKoban)
+                progress = 7;
+            //8
+            else if (!gameData.isClearWallBtn)
+                progress = 9;
+            //10
+            else if (!gameData.isClearSensuBtn)
+                progress = 11;
+            else if (!gameData.isClearDoor1)
+                progress = 12;
+            else if (!gameData.isClearDoor2)
+                progress = 13;
+            else if (!gameData.isClearPaper)
+                progress = 14;
+            else if (!gameData.isClearFire)
+                progress = 15;
+            else if (!gameData.isClearMark)
+                progress = 16;
+            //17
+            //18
+            else if (!gameData.isClearKatana)
+                progress = 19;
+            else if (!gameData.isClearTake)
+                progress = 20;
+            else if (!gameData.isClearMakimono1)
+                progress = 21;
+            else if (!gameData.isClearManji)
+                progress = 22;
+            else if (!gameData.isClearBuki)
+                progress = 23;
+            else if (!gameData.isClearKasa)
+                progress = 24;
+            else if (!gameData.isClearAnimal)
+                progress = 25;
+            else if (!gameData.isClearSyuriken)
+                progress = 26;
+            else if (!gameData.isClearChain)
+                progress = 27;
+            else if (!gameData.isClearWindow2 || !gameData.isClearWindow3 || !gameData.isClearWindow4)
+                progress = 28;
+            else if (!gameData.isClearWindowBtn)
+                progress = 29;
+            else if (!gameData.isClearView)
+                progress = 30;
+            //31
+            else if (!gameData.isClearMato)
+                progress = 32;
+            else if (!gameData.isClearMatoBtn)
+                progress = 33;
+            else if (!gameData.isClearOke)
+                progress = 34;
+            else if (!gameData.isClearNotFire)
+                progress = 35;
+            //36
+            else if (!gameData.isClearMap)
+                progress = 37;
+            else if (!gameData.isClearKuwa)
+                progress = 38;
+            //39
+            else if (!gameData.isClearMakimono2)
+                progress = 40;
+            //41
+            else if (!gameData.isGetKey3)
+                progress = 42;
+            else
+                progress = 43;
+
+            return progress;
+        }
+
+        //おまけの進捗
+        for(int i = 0; i < gameData.OmakeStatus.Length; i++)
+        {
+            if(gameData.OmakeStatus.Substring(i,1) == "0")
+            {
+                progress = i;
+                break;
+            }
+        }
         return progress;
     }
 

@@ -55,8 +55,8 @@ public class GameData
     public bool isClearWindow2; //28
     public bool isClearWindow3; //28
     public bool isClearWindow4; //28
-    public bool isClearView; //29
-    public bool isClearWindowBtn; //30
+    public bool isClearWindowBtn; //29
+    public bool isClearView; //30
     public bool isClearArrow; //31
     public bool isClearMato; //32
     public bool isClearMatoBtn; //33
@@ -93,6 +93,10 @@ public class GameData
     public bool isClear;
     //おまけモード
     public bool isOmake;
+    //おまけの取得数
+    public int OmakeCnt = 0;
+    //おまけのステータス
+    public string OmakeStatus = "s00000000000000000000";
 
 
     //サウンドの音量

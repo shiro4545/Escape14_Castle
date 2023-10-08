@@ -39,9 +39,12 @@ public class ClearManager : MonoBehaviour
         Instance = this;
     }
 
-        //脱出演出
-        public void Escape()
+    //脱出演出
+    public void Escape()
     {
+        SaveLoadSystem.Instance.gameData.isClear = true;
+        SaveLoadSystem.Instance.Save();
+
         //クリアオブジェクトの表示・非表示
         ForEnd.SetActive(true);
         //NotEnd.SetActive(false);

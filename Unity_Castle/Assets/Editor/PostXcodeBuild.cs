@@ -46,23 +46,19 @@ public class PostXcodeBuild
 
     private static LocalizationInfo[] localizationInfo = {
        new LocalizationInfo("en", true, new InfoplistInfo[]
-       {new InfoplistInfo("CFBundleDisplayName",            "School"),
+       {new InfoplistInfo("CFBundleDisplayName",            "Steal Scroll"),
         new InfoplistInfo("NSUserTrackingUsageDescription", "Please set to Allow to avoid displaying inappropriate advertisements."),
        }),
        new LocalizationInfo("ja", false, new InfoplistInfo[]
-       {new InfoplistInfo("CFBundleDisplayName",            "授業をサボる"),
+       {new InfoplistInfo("CFBundleDisplayName",            "巻物盗みたい"),
         new InfoplistInfo("NSUserTrackingUsageDescription", "不適切な広告の表示を避けるために”トラッキングを許可”に設定してください。"),
        }),
        new LocalizationInfo("zh", false, new InfoplistInfo[]
-       {new InfoplistInfo("CFBundleDisplayName",            "School"),
+       {new InfoplistInfo("CFBundleDisplayName",            "偷走一个卷轴"),
         new InfoplistInfo("NSUserTrackingUsageDescription", "请设置允许以避免显示不适当的广告。"),
        }),
-       new LocalizationInfo("es", false, new InfoplistInfo[]
-       {new InfoplistInfo("CFBundleDisplayName",            "School"),
-        new InfoplistInfo("NSUserTrackingUsageDescription", "Establézcalo en Permitir para evitar mostrar anuncios inapropiados."),
-       }),
        new LocalizationInfo("ko", false, new InfoplistInfo[]
-       {new InfoplistInfo("CFBundleDisplayName",            "School"),
+       {new InfoplistInfo("CFBundleDisplayName",            "두루마리"),
         new InfoplistInfo("NSUserTrackingUsageDescription", "부적절한 광고를 표시하지 않으려면 허용으로 설정하십시오."),
        })
    };

@@ -120,8 +120,8 @@ public class CameraManager : MonoBehaviour
             "End",//エンディング画面
             new CameraPositionInfo
             {
-                Position=new Vector3(50.761f,0.988f,-34.989f),
-                Rotate =new Vector3(14,225,0),
+                Position=new Vector3(207.578f,9.427f,151.91f),
+                Rotate =new Vector3(-5,-60,0),
                 MoveNames=new MoveNames
                 {
                 },
