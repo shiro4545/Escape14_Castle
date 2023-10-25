@@ -125,9 +125,9 @@ public class HintManager : MonoBehaviour
 
         //本編orおまけのヒントデータをセット
         if (!SaveLoadSystem.Instance.gameData.isOmake)
-            hintData = HintLoad.Instance.hintData2;
-        else
             hintData = HintLoad.Instance.hintData1;
+        else
+            hintData = HintLoad.Instance.hintData2;
 
         //ヒント1,2,3,4にテキストをセットする
         if(LocalizeManager.Instance.Lang == SystemLanguage.Japanese)

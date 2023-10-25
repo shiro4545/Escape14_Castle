@@ -1,92 +1,237 @@
 fileFormatVersion: 2
 guid: 52337f0498051bb4abdcbdc16ca139cc
-timeCreated: 1520133375
-licenseType: Store
 ModelImporter:
-  serializedVersion: 18
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: Chest Choba-dansu C
-    100004: drawer 3.001
-    100006: drawer 4.001
-    100008: drawer loop 2.001
-    100010: drawer loop.001
-    100012: handle L.002
-    100014: handle R.002
-    100016: Sliding-door 2.001
-    100018: Sliding-door 3.001
-    100020: Sliding-door 3.002
-    100022: Sliding-door 4.001
-    100024: Sliding-door 4.002
-    100026: Sliding-door.001
-    400000: //RootNode
-    400002: Chest Choba-dansu C
-    400004: drawer 3.001
-    400006: drawer 4.001
-    400008: drawer loop 2.001
-    400010: drawer loop.001
-    400012: handle L.002
-    400014: handle R.002
-    400016: Sliding-door 2.001
-    400018: Sliding-door 3.001
-    400020: Sliding-door 3.002
-    400022: Sliding-door 4.001
-    400024: Sliding-door 4.002
-    400026: Sliding-door.001
-    2300000: Chest Choba-dansu C
-    2300002: drawer 3.001
-    2300004: drawer 4.001
-    2300006: drawer loop 2.001
-    2300008: drawer loop.001
-    2300010: handle L.002
-    2300012: handle R.002
-    2300014: Sliding-door 2.001
-    2300016: Sliding-door 3.001
-    2300018: Sliding-door 3.002
-    2300020: Sliding-door 4.001
-    2300022: Sliding-door 4.002
-    2300024: Sliding-door.001
-    3300000: Chest Choba-dansu C
-    3300002: drawer 3.001
-    3300004: drawer 4.001
-    3300006: drawer loop 2.001
-    3300008: drawer loop.001
-    3300010: handle L.002
-    3300012: handle R.002
-    3300014: Sliding-door 2.001
-    3300016: Sliding-door 3.001
-    3300018: Sliding-door 3.002
-    3300020: Sliding-door 4.001
-    3300022: Sliding-door 4.002
-    3300024: Sliding-door.001
-    4300000: handle L.002
-    4300002: handle R.002
-    4300004: Sliding-door 4.002
-    4300006: Sliding-door 3.002
-    4300008: drawer loop 2.001
-    4300010: Sliding-door.001
-    4300012: Sliding-door 3.001
-    4300014: drawer 4.001
-    4300016: Sliding-door 4.001
-    4300018: Sliding-door 2.001
-    4300020: drawer 3.001
-    4300022: drawer loop.001
-    4300024: Chest Choba-dansu C
+  serializedVersion: 21202
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: Chest Choba-dansu C
+  - first:
+      1: 100004
+    second: drawer 3.001
+  - first:
+      1: 100006
+    second: drawer 4.001
+  - first:
+      1: 100008
+    second: drawer loop 2.001
+  - first:
+      1: 100010
+    second: drawer loop.001
+  - first:
+      1: 100012
+    second: handle L.002
+  - first:
+      1: 100014
+    second: handle R.002
+  - first:
+      1: 100016
+    second: Sliding-door 2.001
+  - first:
+      1: 100018
+    second: Sliding-door 3.001
+  - first:
+      1: 100020
+    second: Sliding-door 3.002
+  - first:
+      1: 100022
+    second: Sliding-door 4.001
+  - first:
+      1: 100024
+    second: Sliding-door 4.002
+  - first:
+      1: 100026
+    second: Sliding-door.001
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: Chest Choba-dansu C
+  - first:
+      4: 400004
+    second: drawer 3.001
+  - first:
+      4: 400006
+    second: drawer 4.001
+  - first:
+      4: 400008
+    second: drawer loop 2.001
+  - first:
+      4: 400010
+    second: drawer loop.001
+  - first:
+      4: 400012
+    second: handle L.002
+  - first:
+      4: 400014
+    second: handle R.002
+  - first:
+      4: 400016
+    second: Sliding-door 2.001
+  - first:
+      4: 400018
+    second: Sliding-door 3.001
+  - first:
+      4: 400020
+    second: Sliding-door 3.002
+  - first:
+      4: 400022
+    second: Sliding-door 4.001
+  - first:
+      4: 400024
+    second: Sliding-door 4.002
+  - first:
+      4: 400026
+    second: Sliding-door.001
+  - first:
+      23: 2300000
+    second: Chest Choba-dansu C
+  - first:
+      23: 2300002
+    second: drawer 3.001
+  - first:
+      23: 2300004
+    second: drawer 4.001
+  - first:
+      23: 2300006
+    second: drawer loop 2.001
+  - first:
+      23: 2300008
+    second: drawer loop.001
+  - first:
+      23: 2300010
+    second: handle L.002
+  - first:
+      23: 2300012
+    second: handle R.002
+  - first:
+      23: 2300014
+    second: Sliding-door 2.001
+  - first:
+      23: 2300016
+    second: Sliding-door 3.001
+  - first:
+      23: 2300018
+    second: Sliding-door 3.002
+  - first:
+      23: 2300020
+    second: Sliding-door 4.001
+  - first:
+      23: 2300022
+    second: Sliding-door 4.002
+  - first:
+      23: 2300024
+    second: Sliding-door.001
+  - first:
+      33: 3300000
+    second: Chest Choba-dansu C
+  - first:
+      33: 3300002
+    second: drawer 3.001
+  - first:
+      33: 3300004
+    second: drawer 4.001
+  - first:
+      33: 3300006
+    second: drawer loop 2.001
+  - first:
+      33: 3300008
+    second: drawer loop.001
+  - first:
+      33: 3300010
+    second: handle L.002
+  - first:
+      33: 3300012
+    second: handle R.002
+  - first:
+      33: 3300014
+    second: Sliding-door 2.001
+  - first:
+      33: 3300016
+    second: Sliding-door 3.001
+  - first:
+      33: 3300018
+    second: Sliding-door 3.002
+  - first:
+      33: 3300020
+    second: Sliding-door 4.001
+  - first:
+      33: 3300022
+    second: Sliding-door 4.002
+  - first:
+      33: 3300024
+    second: Sliding-door.001
+  - first:
+      43: 4300000
+    second: handle L.002
+  - first:
+      43: 4300002
+    second: handle R.002
+  - first:
+      43: 4300004
+    second: Sliding-door 4.002
+  - first:
+      43: 4300006
+    second: Sliding-door 3.002
+  - first:
+      43: 4300008
+    second: drawer loop 2.001
+  - first:
+      43: 4300010
+    second: Sliding-door.001
+  - first:
+      43: 4300012
+    second: Sliding-door 3.001
+  - first:
+      43: 4300014
+    second: drawer 4.001
+  - first:
+      43: 4300016
+    second: Sliding-door 4.001
+  - first:
+      43: 4300018
+    second: Sliding-door 2.001
+  - first:
+      43: 4300020
+    second: drawer 3.001
+  - first:
+      43: 4300022
+    second: drawer loop.001
+  - first:
+      43: 4300024
+    second: Chest Choba-dansu C
+  externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
+    resampleCurves: 1
     optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
-    animationRotationError: .5
-    animationPositionError: .5
-    animationScaleError: .5
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
+    extraUserProperties: []
     clipAnimations: []
     isReadable: 1
   meshes:
@@ -94,38 +239,67 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
     importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    nodeNameCollisionStrategy: 0
+    fileIdsGeneration: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    splitTangentsAcrossUV: 1
     normalImportMode: 0
-    tangentImportMode: 1
+    tangentImportMode: 4
+    normalCalculationMode: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
+    serializedVersion: 3
     human: []
     skeleton: []
-    armTwist: .5
-    foreArmTwist: .5
-    upperLegTwist: .5
-    legTwist: .5
-    armStretch: .0500000007
-    legStretch: .0500000007
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
