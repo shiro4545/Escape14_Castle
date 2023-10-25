@@ -1308,7 +1308,94 @@ public class CameraManager : MonoBehaviour
             }
         },
 
-
+        
+        //**********************************************
+        //おまけ
+        //**********************************************
+        {
+            "Doll7",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(176.586f,10.24f,157.671f),
+                Rotate =new Vector3(-7,-32,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "Tree"
+                },
+            }
+        },
+        {
+            "Doll10",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(159.568f,29.341f,168.916f),
+                Rotate =new Vector3(-23,23,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "3F"
+                },
+            }
+        },
+        {
+            "Doll12",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(147.081f,36.70578f,178.072f),
+                Rotate =new Vector3(15,209,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "TopR"
+                },
+            }
+        },
+        {
+            "Doll14",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(212.3305f,9.5768f,91.6153f),
+                Rotate =new Vector3(26,113,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "Kajiya1"
+                },
+            }
+        },
+        {
+            "Doll17",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(193.7446f,8.7199f,149.7536f),
+                Rotate =new Vector3(23,130,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "OutGate"
+                },
+            }
+        },
+        {
+            "Doll19",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(200.035f,10.00021f,180.858f),
+                Rotate =new Vector3(76,93,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "Take"
+                },
+            }
+        },
+        {
+            "Doll20",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(216.37f,11.31f,183.46f),
+                Rotate =new Vector3(-30,52,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "OutIke"
+                },
+            }
+        },
     };
 
     // Start is called before the first frame update
@@ -1560,6 +1647,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetKoban()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearTatami)
         return;
 
@@ -1580,6 +1669,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetWallBtn()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearWall)
             return;
 
@@ -1600,6 +1691,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetSensuBtn()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearWallBtn)
             return;
 
@@ -1620,6 +1713,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetPaper()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearDoor2)
             return;
 
@@ -1639,6 +1734,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetBuki()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearBuki)
             return;
 
@@ -1659,6 +1756,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetAnimal()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearByobu1
             && SaveLoadSystem.Instance.gameData.isClearByobu2
             && SaveLoadSystem.Instance.gameData.isClearByobu3)
@@ -1678,6 +1777,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetSyuriken()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearSyuriken)
             return;
 
@@ -1694,7 +1795,7 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void InWin3()
     {
-        if (!SaveLoadSystem.Instance.gameData.isClearWindow3)
+        if (!SaveLoadSystem.Instance.gameData.isClearWindow3 && !SaveLoadSystem.Instance.gameData.isOmake)
             return;
 
         Win3.Wall_in.SetActive(false);
@@ -1703,7 +1804,7 @@ public class CameraManager : MonoBehaviour
     //
     private void OutWin3()
     {
-        if (!SaveLoadSystem.Instance.gameData.isClearWindow3)
+        if (!SaveLoadSystem.Instance.gameData.isClearWindow3 && !SaveLoadSystem.Instance.gameData.isOmake)
             return;
 
         Win3.Wall_in.SetActive(true);
@@ -1715,6 +1816,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetView()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearWindow4)
             return;
 
@@ -1732,6 +1835,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetWinBtn()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearWindow2
             && SaveLoadSystem.Instance.gameData.isClearWindow3
             && SaveLoadSystem.Instance.gameData.isClearWindow4)
@@ -1751,6 +1856,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetMatoBtn()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearMato)
             return;
 
@@ -1768,6 +1875,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetMap()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         if (SaveLoadSystem.Instance.gameData.isClearDoll2
             && SaveLoadSystem.Instance.gameData.isClearDoll3
             && SaveLoadSystem.Instance.gameData.isClearDoll4)
@@ -1794,6 +1903,8 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     private void ResetDoukutsu()
     {
+        if (SaveLoadSystem.Instance.gameData.isOmake)
+            return;
         Doukutsu.Mark.SetActive(true);
         Doukutsu.Status = "999";
     }

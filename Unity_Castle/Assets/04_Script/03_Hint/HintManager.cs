@@ -405,8 +405,8 @@ public class HintManager : MonoBehaviour
                 progress = 19;
             else if (!gameData.isClearTake)
                 progress = 20;
-            else if (!gameData.isClearMakimono1)
-                progress = 21;
+            //else if (!gameData.isClearMakimono1)
+            //    progress = 21;
             else if (!gameData.isClearManji)
                 progress = 22;
             else if (!gameData.isClearBuki)
@@ -425,7 +425,8 @@ public class HintManager : MonoBehaviour
                 progress = 29;
             else if (!gameData.isClearView)
                 progress = 30;
-            //31
+            else if (!gameData.isClearArrow)
+                progress = 31;
             else if (!gameData.isClearMato)
                 progress = 32;
             else if (!gameData.isClearMatoBtn)
@@ -434,7 +435,8 @@ public class HintManager : MonoBehaviour
                 progress = 34;
             else if (!gameData.isClearNotFire)
                 progress = 35;
-            //36
+            else if (!gameData.isClearDoll2 || !gameData.isClearDoll3 || !gameData.isClearDoll4)
+                progress = 36;
             else if (!gameData.isClearMap)
                 progress = 37;
             else if (!gameData.isClearKuwa)

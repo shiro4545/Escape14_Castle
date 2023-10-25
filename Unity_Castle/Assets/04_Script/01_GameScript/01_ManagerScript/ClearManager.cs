@@ -10,9 +10,6 @@ public class ClearManager : MonoBehaviour
 
     public static ClearManager Instance { get; private set; }
 
-    //脱出成功フラグ
-    public bool isClear;
-
     //UIパネル
     public GameObject ClearPanel;
     public GameObject GamePanel;
@@ -22,6 +19,8 @@ public class ClearManager : MonoBehaviour
     public GameObject ToOtherApp;
     //「タイトルへ」
     public GameObject ToTitle;
+    //「おまけ」
+    public GameObject ToOmake;
 
     //真っ白パネル
     public GameObject White;
@@ -31,6 +30,7 @@ public class ClearManager : MonoBehaviour
 
     //クリア画面用の部分
     public GameObject ForEnd;
+    public GameObject ForOmakeEnd;
     public GameObject NotEnd;
 
     // Start is called before the first frame update
@@ -39,14 +39,14 @@ public class ClearManager : MonoBehaviour
         Instance = this;
     }
 
-    //脱出演出
+    //本編　脱出演出
     public void Escape()
     {
+        ForEnd.SetActive(true);
+
         SaveLoadSystem.Instance.gameData.isClear = true;
         SaveLoadSystem.Instance.Save();
 
-        //クリアオブジェクトの表示・非表示
-        ForEnd.SetActive(true);
         //NotEnd.SetActive(false);
 
         //クリアパネル表示
@@ -62,6 +62,19 @@ public class ClearManager : MonoBehaviour
         Invoke(nameof(AfterClear1), 6);
     }
 
+    //おまけ　脱出演出
+    public void EscapeOmake()
+    {
+        SaveLoadSystem.Instance.Save();
+
+        ClearPanel.SetActive(true);
+
+        //白パネルのフェード
+        Invoke(nameof(DelayFade), 0.2f);
+        //クリア画面の演出
+        Invoke(nameof(AfterClear1), 4.5f);
+    }
+
     //白パネルのフェードディレイ
     private void DelayFade()
     {
@@ -72,6 +85,7 @@ public class ClearManager : MonoBehaviour
     private void AfterClear1()
     {
         GamePanel.SetActive(false);
+        ForOmakeEnd.SetActive(true);
 
         //カメラ移動
         MainCamera.fieldOfView = 60;
@@ -95,14 +109,13 @@ public class ClearManager : MonoBehaviour
         Invoke(nameof(HideWhite), 5.9f);
         //アプリレビュー表示
         Invoke(nameof(ShowReview), 8.5f);
-
-        isClear = true;
-
     }
 
     //「おすすめアプリ」と「タイトルへ」をフェードイン
     private void DelayFadeBtn()
     {
+        ToOmake.SetActive(false);
+        ToTitle.SetActive(false);
         StartCoroutine("FadeBtn");
     }
     //白パネルを非表示に
@@ -167,14 +180,27 @@ public class ClearManager : MonoBehaviour
     IEnumerator FadeBtn()
     {
 
-        Image fade1 = ToTitle.GetComponent<Image>(); //パネルのイメージ取得;
+        Image fade1;
         Image fade2 = ToOtherApp.GetComponent<Image>(); //パネルのイメージ取得;
+
+        if (!SaveLoadSystem.Instance.gameData.isOmake)
+        {
+            //おまけ
+            fade1 = ToOmake.GetComponent<Image>(); //パネルのイメージ取得;
+            ToOmake.SetActive(true);
+        }
+        else
+        {
+            //本編
+            fade1 = ToTitle.GetComponent<Image>(); //パネルのイメージ取得;
+            ToTitle.SetActive(true);
+        }
+        ToOtherApp.SetActive(true);
+
         // フェード後の色を設定 ★変更可
         fade1.color = new Color(1,1,1,0);
         fade2.color = new Color(1,1,1,0);
-        //ボタン表示
-        ToTitle.SetActive(true);
-        ToOtherApp.SetActive(true);
+
         // フェードインにかかる時間（秒）★変更可
         float fade_time = 4f;
         // ループ回数（0はエラー）★変更可

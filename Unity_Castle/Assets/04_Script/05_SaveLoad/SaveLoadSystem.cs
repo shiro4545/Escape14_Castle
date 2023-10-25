@@ -70,6 +70,7 @@ public class SaveLoadSystem
         float _volueBGM = gameData.VolumeBGM;
         float _volueSE = gameData.VolumeSE;
         bool _isClear = gameData.isClear;
+
         int _omakeCnt = gameData.OmakeCnt;
         string _omakeStatus = gameData.OmakeStatus;
         string[] _hintFlgArray2 = gameData.HintFlgArray2;
@@ -82,6 +83,7 @@ public class SaveLoadSystem
         gameData.VolumeBGM = _volueBGM;
         gameData.VolumeSE = _volueSE;
         gameData.isClear = _isClear;
+
         gameData.OmakeCnt = _omakeCnt;
         gameData.OmakeStatus = _omakeStatus;
         gameData.HintFlgArray2 = _hintFlgArray2;

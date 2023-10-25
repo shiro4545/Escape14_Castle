@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     public GameObject Title;
     public GameObject BtnTitle_Start;
     public GameObject BtnTitle_Continue;
+    public GameObject BtnTitle_Omake;
 
     //はじめから確認パネル内
     public GameObject Title2;
@@ -70,12 +71,14 @@ public class UIManager : MonoBehaviour
     public GameObject ImageClear;
     public GameObject BtnClear_OtherApp;
     public GameObject BtnClear_Title;
+    public GameObject BtnClear_Omake;
 
     //ストーリーパネル内
     public GameObject BtnStory_Close;
     public GameObject TxtStory_Start;
     public GameObject TxtStory_Mid;
     public GameObject TxtStory_Arrow;
+    public GameObject TxtStory_Omake;
 
     //ATTパネル内
     public GameObject ATTPanel;
@@ -114,10 +117,8 @@ public class UIManager : MonoBehaviour
 
     //セーブデータ有無フラグ
     private bool isExistFile;
-    //全クリアフラグ
-    private bool _isClearAll;
-    //続きからか
-    private bool isContinue;
+    //スタートモード 0:はじめから、1:続きから、2:おまけ(はじめから)、3:おまけ(続きから)
+    private int StartMode = 0;
 
     //オーディオオブジェクト
     public GameObject audioSE;
@@ -144,18 +145,18 @@ public class UIManager : MonoBehaviour
         if (isExistFile)
             ChangeSound();
 
-        //セーブデータがあれば全クリ有無を判定
-        if (isExistFile)
-        {
-            if (SaveLoadSystem.Instance.gameData.isClearAll)
-                _isClearAll = true;
-        }
-        //「続きから」ボタンの活性切替
-        if (!isExistFile || _isClearAll)
-            BtnTitle_Continue.GetComponent<Button>().interactable = false;
-
+        //セーブデータがない場合は初期データ保存
         if (!isExistFile)
             SaveLoadSystem.Instance.GameStart();
+
+
+        //「続きから」ボタンの活性切替
+        if (!isExistFile || SaveLoadSystem.Instance.gameData.isClearAll)
+            BtnTitle_Continue.GetComponent<Button>().interactable = false;
+
+        //「おまけ」ボタンの活性切替
+        if (!SaveLoadSystem.Instance.gameData.isClear)
+            BtnTitle_Omake.GetComponent<Button>().interactable = false;
 
         //IDFA表示
         IDFAClass.Initial();
@@ -182,6 +183,11 @@ public class UIManager : MonoBehaviour
         BtnTitle_Continue.GetComponent<Button>().onClick.AddListener(() =>
         {
             OnTapContinue();
+        });
+        //タイトル画面の「おまけ」
+        BtnTitle_Omake.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            OnTapTitleOmake();
         });
         //はじめから確認画面のYES
         BtnStart_Yes.GetComponent<Button>().onClick.AddListener(() =>
@@ -263,6 +269,11 @@ public class UIManager : MonoBehaviour
         {
             OnTapClearTitle();
         });
+        //クリア画面の「おまけ」
+        BtnClear_Omake.GetComponent<Button>().onClick.AddListener(() =>
+        {
+            OnTapClearOmake();
+        });
         //ストーリー画面の「Close」
         BtnStory_Close.GetComponent<Button>().onClick.AddListener(() =>
         {
@@ -296,7 +307,7 @@ public class UIManager : MonoBehaviour
     //タイトル画面の「はじめから」ボタン
     private void OnTapStart()
     {
-        if (isExistFile && !_isClearAll)
+        if (isExistFile && !SaveLoadSystem.Instance.gameData.isClearAll)
         {
             //セーブデータがあって、かつ、全クリしてない場合
             AudioManager.Instance.SoundSE("TapUIBtn");
@@ -309,10 +320,13 @@ public class UIManager : MonoBehaviour
             isExistFile = true;
             BlockPanel.Instance.ShowBlockNoIcon();
             AudioManager.Instance.SoundSE("GameStart");
-            if(_isClearAll)
+
+            if(SaveLoadSystem.Instance.gameData.isClearAll)
                 SaveLoadSystem.Instance.GameStart2nd();
 
-            isContinue = false;
+            StartMode = 0;
+            OmakeSwitch();
+
             StartCoroutine("FadeStart");
         }
     }
@@ -323,7 +337,9 @@ public class UIManager : MonoBehaviour
         BlockPanel.Instance.ShowBlockNoIcon();
         AudioManager.Instance.SoundSE("GameStart");
         Invoke(nameof(ObjectLoad), 2.4f);
-        isContinue = true;
+        StartMode = 1;
+        OmakeSwitch();
+
         StartCoroutine("FadeStart");
     }
     //データロード
@@ -338,7 +354,9 @@ public class UIManager : MonoBehaviour
         BlockPanel.Instance.ShowBlockNoIcon();
         AudioManager.Instance.SoundSE("GameStart");
         SaveLoadSystem.Instance.GameStart2nd();
-        isContinue = false;
+        StartMode = 0;
+        OmakeSwitch();
+
         StartCoroutine("FadeStart");
     }
 
@@ -349,6 +367,40 @@ public class UIManager : MonoBehaviour
         StartCheckPanel.SetActive(false);
         TitlePanel.SetActive(true);
     }
+
+
+    //タイトル画面の「おまけ」ボタン
+    private void OnTapTitleOmake()
+    {
+        OmakeInit();
+
+        Invoke(nameof(ObjectLoad), 2.4f);
+        StartCoroutine("FadeStart");
+    }
+
+    //おまけスタート時
+    private void OmakeInit()
+    {
+        AudioManager.Instance.SoundSE("GameStart");
+        if (SaveLoadSystem.Instance.gameData.OmakeCnt == 0)
+            StartMode = 2;
+        else
+            StartMode = 3;
+
+        OmakeSwitch();
+    }
+
+    //おまけモード切替
+    private void OmakeSwitch()
+    {
+        if(StartMode == 0 || StartMode==1)
+            SaveLoadSystem.Instance.gameData.isOmake = false;
+        else
+            SaveLoadSystem.Instance.gameData.isOmake = true;
+
+        SaveLoadSystem.Instance.Save();
+    }
+
 
     //スタート時のフェード
     IEnumerator FadeStart()
@@ -381,8 +433,13 @@ public class UIManager : MonoBehaviour
         StartCheckPanel.SetActive(false);
         //タイトル画面用
         //ForTitle.SetActive(false);
-        BtnTitle_Continue.GetComponent<Button>().interactable = true;
-        if (isContinue)
+
+        //続きからボタンを活性に
+        if(StartMode == 0)
+            BtnTitle_Continue.GetComponent<Button>().interactable = true;
+
+        //ゲームパネルを表示
+        if (StartMode == 1 || StartMode ==3)
         {
             GamePanel.SetActive(true);
             BlockPanel.Instance.HideBlock();
@@ -402,7 +459,8 @@ public class UIManager : MonoBehaviour
 
         FadeManager.Instance.Panel.SetActive(false);
 
-        if (!isContinue)
+        //ストーリーパネルの表示
+        if (StartMode == 0 || StartMode == 2)
         {
             yield return new WaitForSeconds(1f);
             StartCoroutine("FadeStory");
@@ -572,22 +630,52 @@ public class UIManager : MonoBehaviour
         //タイトル画面用
         //ForTitle.SetActive(true);
         //クリア画面用の部分
-         ClearClass.ForEnd.SetActive(false);
-         //ClearClass.NotEnd.SetActive(true);
-
-        _isClearAll = true;
-        BtnTitle_Continue.GetComponent<Button>().interactable = false;
+         ClearClass.ForOmakeEnd.SetActive(false);
+        //ClearClass.NotEnd.SetActive(true);
 
         //オブジェクトリセット
         StartResetClass.ResetObject();
     }
 
+    //クリア画面の「おまけ」ボタン
+    private void OnTapClearOmake()
+    {
+        BtnTitle_Continue.GetComponent<Button>().interactable = false;
+
+        //おまけスタート
+        OmakeInit();
+
+        //クリアオブジェクトの非表示
+        Invoke(nameof(ClearToOmake), 2.4f);
+        StartCoroutine("FadeStart");
+    }
+
+    //クリアオブジェクトの非表示
+    private void ClearToOmake()
+    {
+        ClearPanel.SetActive(false);
+        ClearClass.ForEnd.SetActive(false);
+        //オブジェクトリセット
+        StartResetClass.ResetObject();
+        //おまけスタート
+        StartResetClass.GameContinue();
+    }
+
+
     //ストーリー画面のフェード表示
     IEnumerator FadeStory()
     {
         Image PanelImg = StoryPanel.GetComponent<Image>();
-        Image StoryImg = TxtStory_Start.GetComponent<Image>();
         Image CloseImg = BtnStory_Close.GetComponent<Image>();
+        Image StoryImg;
+
+        if(StartMode == 0)
+            //本編 はじめから
+            StoryImg = TxtStory_Start.GetComponent<Image>();
+        else
+            //おまけ はじめから
+            StoryImg = TxtStory_Omake.GetComponent<Image>();
+
         PanelImg.color = new Color(0, 0, 0, 0);
         StoryImg.color = new Color(1, 1, 1, 0);
         CloseImg.color = new Color(1, 1, 1, 0);
@@ -629,6 +717,7 @@ public class UIManager : MonoBehaviour
         TxtStory_Start.GetComponent<Image>().color = new Color(1,1,1,0);
         TxtStory_Mid.GetComponent<Image>().color = new Color(1,1,1,0);
         TxtStory_Arrow.GetComponent<Image>().color = new Color(1,1,1,0);
+        TxtStory_Omake.GetComponent<Image>().color = new Color(1,1,1,0);
         StoryPanel.SetActive(false);
         GamePanel.SetActive(true);
 
@@ -725,8 +814,9 @@ public class UIManager : MonoBehaviour
                 //Debug.Log("iPhoneSE");
                 //タイトル
                 Title.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 440);
-                BtnTitle_Start.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -335);
-                BtnTitle_Continue.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -519);
+                BtnTitle_Start.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -260);
+                BtnTitle_Continue.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -430);
+                BtnTitle_Omake.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -600);
                 //はじめから確認パネル
                 Title2.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 440);
                 YesNo.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -350);
@@ -754,6 +844,7 @@ public class UIManager : MonoBehaviour
                 //クリアパネル
                 BtnClear_OtherApp.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -360);
                 BtnClear_Title.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -510);
+                BtnClear_Omake.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -510);
                 //ブロック
                 LightIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(-75, 380);
                 //ストーリー
@@ -769,8 +860,9 @@ public class UIManager : MonoBehaviour
                 //Debug.Log("iPhone8+");
                 //タイトル
                 Title.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 440);
-                BtnTitle_Start.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -318);
-                BtnTitle_Continue.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -502);
+                BtnTitle_Start.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -290);
+                BtnTitle_Continue.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -450);
+                BtnTitle_Omake.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -630);
                 //はじめから確認パネル
                 Title2.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 440);
                 YesNo.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -350);
@@ -797,6 +889,7 @@ public class UIManager : MonoBehaviour
                 //クリアパネル
                 BtnClear_OtherApp.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -350);
                 BtnClear_Title.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -500);
+                BtnClear_Omake.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -500);
                 //ブロック
                 LightIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(-75, 385);
                 //ストーリー
@@ -823,8 +916,10 @@ public class UIManager : MonoBehaviour
                 Title.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 210);
                 BtnTitle_Start.GetComponent<RectTransform>().sizeDelta = new Vector2(120, 25);
                 BtnTitle_Continue.GetComponent<RectTransform>().sizeDelta = new Vector2(120, 25);
-                BtnTitle_Start.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -250);
-                BtnTitle_Continue.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -400);
+                BtnTitle_Omake.GetComponent<RectTransform>().sizeDelta = new Vector2(120, 25);
+                BtnTitle_Start.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -200);
+                BtnTitle_Continue.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -340);
+                BtnTitle_Omake.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -480);
                 //はじめから確認パネル
                 Title2.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 210);
                 YesNo.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -210);
@@ -868,14 +963,17 @@ public class UIManager : MonoBehaviour
                 ImageClear.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 300);
                 BtnClear_OtherApp.GetComponent<RectTransform>().sizeDelta = new Vector2(300, 100);
                 BtnClear_Title.GetComponent<RectTransform>().sizeDelta = new Vector2(300, 100);
+                BtnClear_Omake.GetComponent<RectTransform>().sizeDelta = new Vector2(300, 100);
                 BtnClear_OtherApp.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -230);
                 BtnClear_Title.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -360);
+                BtnClear_Omake.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -360);
                 //ブロック
                 LightIcon.GetComponent<RectTransform>().anchoredPosition = new Vector2(-75, 270);
                 //ストーリー
                 TxtStory_Start.GetComponent<RectTransform>().sizeDelta = new Vector2(550, 550);
                 TxtStory_Mid.GetComponent<RectTransform>().sizeDelta = new Vector2(550, 550);
                 TxtStory_Arrow.GetComponent<RectTransform>().sizeDelta = new Vector2(550, 550);
+                TxtStory_Omake.GetComponent<RectTransform>().sizeDelta = new Vector2(550, 550);
                 BtnStory_Close.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -405);
                 //ATT推奨画像
                 BtnATT.GetComponent<RectTransform>().sizeDelta = new Vector2(400, 600);
@@ -917,6 +1015,7 @@ public class UIManager : MonoBehaviour
         Title.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "Title" + Lang1);
         BtnTitle_Start.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "Start" + Lang2);
         BtnTitle_Continue.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "Continue" + Lang2);
+        BtnTitle_Omake.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "Omake" + Lang2);
         //スタートチェック画面
         Title2.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "Title" + Lang1);
         CheckTxt.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "StartCheck" + Lang1);
@@ -942,10 +1041,12 @@ public class UIManager : MonoBehaviour
         ImageClear.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "Clear" + Lang1);
         BtnClear_OtherApp.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "Other" + Lang2);
         BtnClear_Title.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "toTitle" + Lang2);
+        BtnClear_Omake.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "Omake" + Lang2);
         //ストーリー画面
         TxtStory_Start.GetComponent<Image>().sprite = Resources.Load<Sprite>("05_Story/" + "Start" + Lang1);
         TxtStory_Mid.GetComponent<Image>().sprite = Resources.Load<Sprite>("05_Story/" + "Mid" + Lang1);
         TxtStory_Arrow.GetComponent<Image>().sprite = Resources.Load<Sprite>("05_Story/" + "Arrow" + Lang1);
+        TxtStory_Omake.GetComponent<Image>().sprite = Resources.Load<Sprite>("05_Story/" + "Omake" + Lang1);
         //ATT画面
         BtnATT.GetComponent<Image>().sprite = Resources.Load<Sprite>(path + "ATT" + Lang1);
     }

@@ -24,6 +24,7 @@ public class Wall_Tap : TapCollider
         else
         {
             //おまけ
+            return;
         }
 
         BlockPanel.Instance.ShowBlockNoIcon();

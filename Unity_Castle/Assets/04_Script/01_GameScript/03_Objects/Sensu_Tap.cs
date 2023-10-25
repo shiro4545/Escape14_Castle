@@ -15,8 +15,8 @@ public class Sensu_Tap : TapCollider
     {
         base.OnTap();
 
-        if (SaveLoadSystem.Instance.gameData.isOmake)
-            return;
+        //if (SaveLoadSystem.Instance.gameData.isOmake)
+        //    return;
 
         AudioManager.Instance.SoundSE("Slide3");
 

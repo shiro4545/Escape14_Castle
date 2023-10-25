@@ -114,6 +114,10 @@ public class StartResetManager : MonoBehaviour
     //<summary>
     public void ResetObject()
     {
+        //おまけリセット
+        if(gameData.isOmake)
+            OmakeManager.Instance.ResetOmake();
+
         //1
         Tea.Status = "000";
         Tea.Before.SetActive(true);
@@ -471,9 +475,11 @@ public class StartResetManager : MonoBehaviour
         Clear.ClearImage.transform.localScale = new Vector3(0, 0, 1);
         Clear.ToOtherApp.SetActive(false);
         Clear.ToTitle.SetActive(false);
+        Clear.ToOmake.SetActive(false);
 
         //アイテムUIリセット
         ItemManager.Instance.ItemAllDelete();
+
     }
 
 
@@ -486,7 +492,7 @@ public class StartResetManager : MonoBehaviour
         gameData = SaveLoadSystem.Instance.gameData;
 
         //1
-        if (gameData.isClearTea)
+        if (gameData.isClearTea || gameData.isOmake)
         {
             Tea.Before.SetActive(false);
             Tea.After.SetActive(true);
@@ -495,7 +501,7 @@ public class StartResetManager : MonoBehaviour
         //2 null
 
         //3
-        if (gameData.isClearTansu)
+        if (gameData.isClearTansu || gameData.isOmake)
         {
             TansuBtn.Before.SetActive(false);
             TansuBtn.After.SetActive(true);
@@ -507,13 +513,13 @@ public class StartResetManager : MonoBehaviour
             TansuBtnAr[1].Btns[9].SetActive(true);
             TansuBtnAr[2].Btns[3].SetActive(true);
         }
-        if(gameData.isGetRousoku1)
+        if(gameData.isGetRousoku1 || gameData.isOmake)
             TansuBtn.Rousoku.SetActive(false);
 
         //4 null
 
         //5
-        if (gameData.isClearRousoku)
+        if (gameData.isClearRousoku || gameData.isOmake)
         {
             Rousoku.Before.SetActive(false);
             Rousoku.After.SetActive(true);
@@ -522,7 +528,7 @@ public class StartResetManager : MonoBehaviour
         }
 
         //6
-        if (gameData.isClearTatami)
+        if (gameData.isClearTatami || gameData.isOmake)
         {
             Tatami.Before.SetActive(false);
             Tatami.After.SetActive(true);
@@ -535,7 +541,7 @@ public class StartResetManager : MonoBehaviour
         }
 
         //7
-        if (gameData.isClearKoban)
+        if (gameData.isClearKoban || gameData.isOmake)
         {
             Koban.Before.SetActive(false);
             Koban.After.SetActive(true);
@@ -550,10 +556,13 @@ public class StartResetManager : MonoBehaviour
         //8 null
 
         //9
-        if (gameData.isClearWallBtn)
+        if (gameData.isClearWallBtn || gameData.isOmake)
         {
-            Wall.Btns[0].SetActive(false);
-            Wall.Btns[2].SetActive(true);
+            if (!gameData.isOmake)
+            {
+                Wall.Btns[2].SetActive(true);
+                Wall.Btns[0].SetActive(false);
+            }
             WallBtn.Before.SetActive(false);
             WallBtn.After.SetActive(true);
         }
@@ -561,7 +570,7 @@ public class StartResetManager : MonoBehaviour
         //10 null
 
         //11
-        if (gameData.isClearSensuBtn)
+        if (gameData.isClearSensuBtn || gameData.isOmake)
         {
             Sensu.Status = "1011";
             foreach (var tap in SensuAr)
@@ -582,11 +591,11 @@ public class StartResetManager : MonoBehaviour
             SensuBtnAr[2].Btns[1].SetActive(true);
             SensuBtnAr[3].Btns[2].SetActive(true);
         }
-        if(gameData.isGetKey1)
+        if(gameData.isGetKey1 || gameData.isOmake)
             SensuBtn.Key.SetActive(false);
 
         //12
-        if (gameData.isClearDoor1)
+        if (gameData.isClearDoor1 || gameData.isOmake)
         {
             Door1.Def.SetActive(false);
             Door1.Close.SetActive(false);
@@ -594,14 +603,14 @@ public class StartResetManager : MonoBehaviour
         }
 
         //13
-        if (gameData.isClearDoor2)
+        if (gameData.isClearDoor2 || gameData.isOmake)
         {
             Hei.Before.SetActive(false);
             Hei.After.SetActive(true);
         }
 
         //14
-        if (gameData.isClearPaper)
+        if (gameData.isClearPaper || gameData.isOmake)
         {
             Paper.Before.SetActive(false);
             Paper.Rousoku.SetActive(true);
@@ -612,24 +621,24 @@ public class StartResetManager : MonoBehaviour
             PaperAr[1].Btns[2].SetActive(true);
             PaperAr[2].Btns[1].SetActive(true);
         }
-        if(gameData.isGetRousoku3)
+        if(gameData.isGetRousoku3 || gameData.isOmake)
             Paper.Rousoku.SetActive(false);
 
         //15
-        if (gameData.isClearFire)
+        if (gameData.isClearFire || gameData.isOmake)
         {
             Kamado.Def_Sumi.SetActive(false);
             Kamado.After_Sumi.SetActive(true);
         }
 
         //16
-        if (gameData.isClearMark)
+        if (gameData.isClearMark || gameData.isOmake)
         {
             Mark.Before.SetActive(false);
             Mark.After.SetActive(true);
             Mark.Katana.SetActive(true);
         }
-        if(gameData.isGetKatana)
+        if(gameData.isGetKatana || gameData.isOmake)
             Mark.Katana.SetActive(false);
 
         //17 null
@@ -637,26 +646,26 @@ public class StartResetManager : MonoBehaviour
         //19 null
 
         //20
-        if (gameData.isClearTake)
+        if (gameData.isClearTake || gameData.isOmake)
         {
             Take.Before.SetActive(false);
             Take.After.SetActive(true);
             Take.Makimono.SetActive(true);
         }
-        if(gameData.isGetMakimono1)
+        if(gameData.isGetMakimono1 || gameData.isOmake)
             Take.Makimono.SetActive(false);
 
         //21 null
 
         //22
-        if (gameData.isClearManji)
+        if (gameData.isClearManji || gameData.isOmake)
         {
             Manji.Before.SetActive(false);
             Manji.After.SetActive(true);
         }
 
         //23
-        if (gameData.isClearBuki)
+        if (gameData.isClearBuki || gameData.isOmake)
         {
             Buki.Before.SetActive(false);
             Buki.After.SetActive(true);
@@ -672,11 +681,11 @@ public class StartResetManager : MonoBehaviour
             Buki.Defs[3].Bukis[0].SetActive(true);
             Buki.Defs[4].Bukis[2].SetActive(true);
         }
-        if (gameData.isGetSyuriken1) 
+        if (gameData.isGetSyuriken1 || gameData.isOmake) 
             Buki.Syuriken1.SetActive(false);
 
         //24
-        if (gameData.isClearKasa)
+        if (gameData.isClearKasa || gameData.isOmake)
         {
             Kasa.Before.SetActive(false);
             Kasa.After.SetActive(true);
@@ -688,27 +697,27 @@ public class StartResetManager : MonoBehaviour
             KasaAr[1].Btns[1].SetActive(true);
             KasaAr[2].Btns[3].SetActive(true);
         }
-        if(gameData.isGetSyuriken2)
+        if(gameData.isGetSyuriken2 || gameData.isOmake)
             Kasa.Syuriken2.SetActive(false);
 
         //25
-        if (gameData.isClearByobu1)
+        if (gameData.isClearByobu1 || gameData.isOmake)
         {
             ByobuAr[0].Close.SetActive(false);
             ByobuAr[0].Open.SetActive(true);
         }
-        if (gameData.isClearByobu2)
+        if (gameData.isClearByobu2 || gameData.isOmake)
         {
             ByobuAr[1].Close.SetActive(false);
             ByobuAr[1].Open.SetActive(true);
         }
-        if (gameData.isClearByobu3)
+        if (gameData.isClearByobu3 || gameData.isOmake)
         {
             ByobuAr[2].Close.SetActive(false);
             ByobuAr[2].Open.SetActive(true);
         }
 
-        if (gameData.isClearAnimal)
+        if (gameData.isClearAnimal || gameData.isOmake)
         {
             Animal.Before.SetActive(false);
             Animal.After.SetActive(true);
@@ -720,7 +729,7 @@ public class StartResetManager : MonoBehaviour
             AnimalAr[1].Btns[1].SetActive(true);
             AnimalAr[2].Btns[3].SetActive(true);
         }
-        if(gameData.isGetSyuriken3)
+        if(gameData.isGetSyuriken3 || gameData.isOmake)
             Animal.Syuriken3.SetActive(false);
 
         //26
@@ -740,17 +749,17 @@ public class StartResetManager : MonoBehaviour
             }
         }
 
-        if (gameData.isClearSyuriken)
+        if (gameData.isClearSyuriken || gameData.isOmake)
         {
             Syuri.Before.SetActive(false);
             Syuri.After.SetActive(true);
             Syuri.Key2.SetActive(true);
         }
-        if(gameData.isGetKey2)
+        if(gameData.isGetKey2 || gameData.isOmake)
             Syuri.Key2.SetActive(false);
 
         //27
-        if (gameData.isClearChain)
+        if (gameData.isClearChain || gameData.isOmake)
         {
             Chain.Def.SetActive(false);
             Chain.Close.SetActive(false);
@@ -758,27 +767,27 @@ public class StartResetManager : MonoBehaviour
         }
 
         //28
-        if (gameData.isClearWindow2)
+        if (gameData.isClearWindow2 || gameData.isOmake)
         {
             Win2.Close.SetActive(false);
             Win2.Open.SetActive(true);
         }
 
-        if (gameData.isClearWindow3)
+        if (gameData.isClearWindow3 || gameData.isOmake)
         {
             Win3.Close_in.SetActive(false);
             Win3.Close_out.SetActive(false);
             Win3.Open_out.SetActive(true);
         }
 
-        if (gameData.isClearWindow4)
+        if (gameData.isClearWindow4 || gameData.isOmake)
         {
             Win4.Close.SetActive(false);
             Win4.Open.SetActive(true);
         }
 
         //29
-        if (gameData.isClearView)
+        if (gameData.isClearView || gameData.isOmake)
         {
             View.Before.SetActive(false);
             View.After.SetActive(true);
@@ -790,11 +799,11 @@ public class StartResetManager : MonoBehaviour
             ViewAr[1].Btns[4].SetActive(true);
             ViewAr[2].Btns[6].SetActive(true);
         }
-        if (gameData.isGetArrow)
+        if (gameData.isGetArrow || gameData.isOmake)
             View.Arrow.SetActive(false);
 
         //30
-        if (gameData.isClearWindowBtn)
+        if (gameData.isClearWindowBtn || gameData.isOmake)
         {
             WinBtn.Before.SetActive(false);
             WinBtn.After.SetActive(true);
@@ -806,20 +815,20 @@ public class StartResetManager : MonoBehaviour
             WinBtnAr[1].Btns[1].SetActive(true);
             WinBtnAr[2].Btns[3].SetActive(true);
         }
-        if (gameData.isGetYa)
+        if (gameData.isGetYa || gameData.isOmake)
             WinBtn.Ya.SetActive(false);
 
         //31 null
 
         //32
-        if (gameData.isClearMato)
+        if (gameData.isClearMato || gameData.isOmake)
         {
             Mato.Ya1.SetActive(true);
             Mato.Ya2.SetActive(true);
         }
 
         //33
-        if (gameData.isClearMatoBtn)
+        if (gameData.isClearMatoBtn || gameData.isOmake)
         {
             MatoBtn.Before.SetActive(false);
             MatoBtn.After.SetActive(true);
@@ -831,44 +840,44 @@ public class StartResetManager : MonoBehaviour
             MatoBtn.Btns0[7].SetActive(true);
             MatoBtn.Btns1[1].SetActive(true);
         }
-        if(gameData.isGetKuwa)
+        if(gameData.isGetKuwa || gameData.isOmake)
             MatoBtn.Kuwa.SetActive(false);
-        if (gameData.isGetOke)
+        if (gameData.isGetOke || gameData.isOmake)
             MatoBtn.Oke.SetActive(false);
 
         //34
 
         //35
-        if (gameData.isClearNotFire)
+        if (gameData.isClearNotFire || gameData.isOmake)
         {
             Kamado.After_Sumi.SetActive(false);
             Kamado.Def_Sumi.SetActive(true);
         }
-        if (gameData.isClearClean)
+        if (gameData.isClearClean || gameData.isOmake)
         {
             Kamado.Def_Sumi.SetActive(false);
             Kamado.Sumi_Clean.SetActive(true);
         }
-        if (gameData.isClearOpen)
+        if (gameData.isClearOpen || gameData.isOmake)
         {
             Kamado.Close.SetActive(false);
             Kamado.Open.SetActive(true);
         }
 
         //36
-        if (gameData.isClearDoll2)
+        if (gameData.isClearDoll2 || gameData.isOmake)
         {
             Doll2.Before.SetActive(false);
             Doll2.After.SetActive(true);
         }
-        if (gameData.isClearDoll4)
+        if (gameData.isClearDoll4 || gameData.isOmake)
         {
             Doll4.Before.SetActive(false);
             Doll4.After.SetActive(true);
         }
 
         //37
-        if (gameData.isClearMap)
+        if (gameData.isClearMap || gameData.isOmake)
         {
             Map.Before.SetActive(false);
             Map.Batsu.SetActive(true);
@@ -884,12 +893,12 @@ public class StartResetManager : MonoBehaviour
         }
 
         //38
-        if (gameData.isClearKuwa)
+        if (gameData.isClearKuwa || gameData.isOmake)
         {
             Sand.Def.SetActive(false);
             Sand.Makimono2.SetActive(true);
         }
-        if(gameData.isGetMakimono2)
+        if(gameData.isGetMakimono2 || gameData.isOmake)
             Sand.Makimono2.SetActive(false);
 
         //39 null
@@ -897,30 +906,37 @@ public class StartResetManager : MonoBehaviour
         //41 null
 
         //42
-        if (gameData.isOpenBox)
+        if (gameData.isOpenBox || gameData.isOmake)
         {
             Box.Close.SetActive(false);
             Box.Open.SetActive(true);
             Box.Key3.SetActive(true);
         }
-        if(gameData.isGetKey3)
+        if(gameData.isGetKey3 || gameData.isOmake)
+        {
             Box.Key3.SetActive(false);
+            Kamado.Close.SetActive(true);
+            Kamado.Open.SetActive(false);
+        }
 
         //43 All
 
-        //アイテム
-        //保有アイテム
-        if (gameData.getItems == "")
-        return;
-        string[] arr = gameData.getItems.Split(';');
-        foreach (var item in arr)
+
+        //おまけスタート時
+        if (gameData.isOmake)
+            OmakeManager.Instance.StartOmake();
+        else
         {
-            if (item != "")
-                ItemManager.Instance.loadItem(item);
+            //本編のアイテムロード
+            if (gameData.getItems == "")
+            return;
+            string[] arr = gameData.getItems.Split(';');
+            foreach (var item in arr)
+            {
+                if (item != "")
+                    ItemManager.Instance.loadItem(item);
+            }
         }
     }
-
-
-
 
 }
