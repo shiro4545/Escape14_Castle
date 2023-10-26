@@ -209,6 +209,18 @@ public class CameraManager : MonoBehaviour
             }
         },
         {
+            "Wafuku1",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(147.138f,9.721766f,104.166f),
+                Rotate =new Vector3(5,-152,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "RoomStart"
+                },
+            }
+        },
+        {
             "Koban",//
             new CameraPositionInfo
             {
@@ -233,6 +245,18 @@ public class CameraManager : MonoBehaviour
             }
         },
         //====RoomTansu派生==============
+        {
+            "Wafuku2",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(146.805f,9.766f,113.632f),
+                Rotate =new Vector3(5,-67,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "RoomTansu"
+                },
+            }
+        },
         {
             "Rousoku1",//
             new CameraPositionInfo
@@ -303,6 +327,7 @@ public class CameraManager : MonoBehaviour
                 {
                     Back = "Tansu"
                 },
+                iPad_FOV = new int[]{57}
             }
         },
         {
@@ -476,6 +501,18 @@ public class CameraManager : MonoBehaviour
         },
         //====RoomSensu派生==============
         {
+            "Wafuku3",//
+            new CameraPositionInfo
+            {
+               Position=new Vector3(152.428f,9.792f,104.263f),
+                Rotate =new Vector3(5,-205,0),
+                MoveNames=new MoveNames
+                {
+                    Back = "RoomSensu"
+                },
+            }
+        },
+        {
             "Sensu",//
             new CameraPositionInfo
             {
@@ -590,6 +627,7 @@ public class CameraManager : MonoBehaviour
                 {
                     Back = "Any"
                 },
+                iPad_FOV = new int[]{52}
             }
         },
         //**********************************************
@@ -830,18 +868,6 @@ public class CameraManager : MonoBehaviour
             }
         },
         {
-            "Doukutsu3",//
-            new CameraPositionInfo
-            {
-               Position=new Vector3(189.28f,10.042f,61.418f),
-                Rotate =new Vector3(6,180,0),
-                MoveNames=new MoveNames
-                {
-                    Back = "Kamado"
-                },
-            }
-        },
-        {
             "DoukutsuTable",//
             new CameraPositionInfo
             {
@@ -849,7 +875,7 @@ public class CameraManager : MonoBehaviour
                 Rotate =new Vector3(48,180,0),
                 MoveNames=new MoveNames
                 {
-                    Back = "Doukutsu3"
+                    Back = "Doukutsu2"
                 },
             }
         },
@@ -1782,7 +1808,12 @@ public class CameraManager : MonoBehaviour
         if (SaveLoadSystem.Instance.gameData.isClearSyuriken)
             return;
 
-        Syuri.SetsArray[Syuri.TapNewIdx].Sets[Syuri.Status[Syuri.TapNewIdx].Length - 1].Syurikens[Syuri.NewStatus].SetActive(true);
+        if (Syuri.TapOldIdx == 9)
+            return;
+
+        string[] Status = SaveLoadSystem.Instance.gameData.StatusSyuri;
+
+        Syuri.SetsArray[Syuri.TapNewIdx].Sets[Status[Syuri.TapNewIdx].Length - 1].Syurikens[Syuri.NewStatus].SetActive(true);
         Syuri.Selects[Syuri.TapNewIdx].Syurikens[Syuri.NewStatus].SetActive(false);
         Syuri.TapNewIdx = 0;
         Syuri.TapOldIdx = 9;

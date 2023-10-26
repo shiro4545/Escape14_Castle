@@ -47,7 +47,7 @@ public class Doukutsu_Judge : MonoBehaviour
         //カメラフェード
         Invoke(nameof(Fade), 4.0f);
         //オブジェクト切替
-        Invoke(nameof(SwitchObj), 4.9f);
+        Invoke(nameof(SwitchObj), 4.85f);
     }
 
     //カメラズーム

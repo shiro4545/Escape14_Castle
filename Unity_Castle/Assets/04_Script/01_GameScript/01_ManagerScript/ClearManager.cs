@@ -73,6 +73,13 @@ public class ClearManager : MonoBehaviour
         Invoke(nameof(DelayFade), 0.2f);
         //クリア画面の演出
         Invoke(nameof(AfterClear1), 4.5f);
+        Invoke(nameof(ShowOmakeEnd), 4.5f);
+    }
+
+    //おまけエンド表示
+    private void ShowOmakeEnd()
+    {
+        ForOmakeEnd.SetActive(true);
     }
 
     //白パネルのフェードディレイ
@@ -85,7 +92,6 @@ public class ClearManager : MonoBehaviour
     private void AfterClear1()
     {
         GamePanel.SetActive(false);
-        ForOmakeEnd.SetActive(true);
 
         //カメラ移動
         MainCamera.fieldOfView = 60;

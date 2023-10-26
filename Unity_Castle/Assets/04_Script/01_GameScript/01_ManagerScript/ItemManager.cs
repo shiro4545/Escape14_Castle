@@ -25,6 +25,8 @@ public class ItemManager : MonoBehaviour
     public GameObject BtnYa;
     public GameObject BtnMakimono2;
 
+    public Kamado_Tap Kamado;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,7 +91,11 @@ public class ItemManager : MonoBehaviour
         else if (itemName == "Key2")
             SaveLoadSystem.Instance.gameData.isGetKey2 = true;
         else if (itemName == "Key3")
+        {
             SaveLoadSystem.Instance.gameData.isGetKey3 = true;
+            Kamado.Close.SetActive(true);
+            Kamado.Open.SetActive(false);
+        }
         else if (itemName == "Rousoku1")
             SaveLoadSystem.Instance.gameData.isGetRousoku1 = true;
         else if (itemName == "Rousoku3")

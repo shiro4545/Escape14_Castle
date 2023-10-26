@@ -298,7 +298,10 @@ public class HintManager : MonoBehaviour
         {
             Ads1.SetActive(false);
             TxtObject1.SetActive(true);
-            Hint2.SetActive(true);
+
+            //ヒント2まである場合
+            if (hintData.ja.hint2[Progress].Length > 5) //5文字以上
+                Hint2.SetActive(true);
         }
         //ヒント2の動画を視聴済みの場合
         if (CountWatch >= 2)

@@ -27,6 +27,9 @@ public class Kamado_Tap : TapCollider
         if (SaveLoadSystem.Instance.gameData.isOmake)
             return;
 
+        if (SaveLoadSystem.Instance.gameData.isGetKey3)
+            return;
+
         //15
         if (ItemManager.Instance.SelectItem == "Rousoku3")
         {
