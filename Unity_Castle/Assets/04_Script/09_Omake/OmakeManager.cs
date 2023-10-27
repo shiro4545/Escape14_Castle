@@ -89,6 +89,10 @@ public class OmakeManager : MonoBehaviour
 
         Txt_Count.text = SaveLoadSystem.Instance.gameData.OmakeCnt.ToString();
 
+        //動画表示
+        if(SaveLoadSystem.Instance.gameData.OmakeCnt == 8 || SaveLoadSystem.Instance.gameData.OmakeCnt == 15)
+            Invoke(nameof(ShowAd), 0.5f);
+
         //答え合わせ
         if (SaveLoadSystem.Instance.gameData.OmakeCnt != 20)
             return;
@@ -108,5 +112,10 @@ public class OmakeManager : MonoBehaviour
     {
         ClearManager.Instance.EscapeOmake();
         BlockPanel.Instance.HideBlock();
+    }
+
+    private void ShowAd()
+    {
+        GoogleAds.Instance.ShowInterstitialAd2();
     }
 }

@@ -665,16 +665,25 @@ public class UIManager : MonoBehaviour
     //ストーリー画面のフェード表示
     IEnumerator FadeStory()
     {
+        TxtStory_Start.SetActive(false);
+        TxtStory_Omake.SetActive(false);
+
         Image PanelImg = StoryPanel.GetComponent<Image>();
         Image CloseImg = BtnStory_Close.GetComponent<Image>();
         Image StoryImg;
 
         if(StartMode == 0)
+        {
             //本編 はじめから
+            TxtStory_Start.SetActive(true);
             StoryImg = TxtStory_Start.GetComponent<Image>();
+        }
         else
+        {
             //おまけ はじめから
+            TxtStory_Omake.SetActive(true);
             StoryImg = TxtStory_Omake.GetComponent<Image>();
+        }
 
         PanelImg.color = new Color(0, 0, 0, 0);
         StoryImg.color = new Color(1, 1, 1, 0);

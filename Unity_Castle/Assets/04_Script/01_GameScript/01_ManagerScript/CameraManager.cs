@@ -1610,7 +1610,7 @@ public class CameraManager : MonoBehaviour
             {
                 if (!SaveLoadSystem.Instance.gameData.isOmake)
                 {
-                    if (CurrentPositionName == "3F" && !SaveLoadSystem.Instance.gameData.isClearChain)
+                    if (obj.MovePositionName[0] == "Top" && !SaveLoadSystem.Instance.gameData.isClearChain)
                         continue;
                 }
 
