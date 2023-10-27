@@ -114,8 +114,10 @@ public class StartResetManager : MonoBehaviour
     //<summary>
     public void ResetObject()
     {
+        gameData = SaveLoadSystem.Instance.gameData;
+
         //おまけリセット
-        if(gameData.isOmake)
+        if (gameData.isOmake)
             OmakeManager.Instance.ResetOmake();
 
         //1
