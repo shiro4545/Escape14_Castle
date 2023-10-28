@@ -1833,7 +1833,7 @@ public class CameraManager : MonoBehaviour
         Win3.Open_in.SetActive(true);
     }
     //
-    private void OutWin3()
+    public void OutWin3()
     {
         if (!SaveLoadSystem.Instance.gameData.isClearWindow3 && !SaveLoadSystem.Instance.gameData.isOmake)
             return;

@@ -641,6 +641,7 @@ public class UIManager : MonoBehaviour
     private void OnTapClearOmake()
     {
         BtnTitle_Continue.GetComponent<Button>().interactable = false;
+        BtnTitle_Omake.GetComponent<Button>().interactable = true;
 
         //おまけスタート
         OmakeInit();

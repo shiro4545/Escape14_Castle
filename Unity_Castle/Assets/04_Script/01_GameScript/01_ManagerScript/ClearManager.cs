@@ -65,9 +65,10 @@ public class ClearManager : MonoBehaviour
     //おまけ　脱出演出
     public void EscapeOmake()
     {
-        SaveLoadSystem.Instance.Save();
-
         ClearPanel.SetActive(true);
+
+        //窓切替 (固有)
+        CameraManager.Instance.OutWin3();
 
         //白パネルのフェード
         Invoke(nameof(DelayFade), 0.2f);
