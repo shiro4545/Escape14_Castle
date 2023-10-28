@@ -12,7 +12,7 @@ public class IAPiOS : MonoBehaviour, IStoreListener
 	static IStoreController storeController;                        // Purchasing システムの参照
 	static IExtensionProvider storeExtensionProvider;               // 拡張した場合のPurchasing サブシステムの参照
 	static string productIDNonConsumable = "nonconsumable";         // 非消費型製品の汎用ID
-	static string productNameAppleNonConsumable = "Item01";       // Apple App Store identifier for the non-consumable product.
+	static string productNameAppleNonConsumable = "ItemCastle";       // Apple App Store identifier for the non-consumable product.
 
 	public UIManager UI;
 

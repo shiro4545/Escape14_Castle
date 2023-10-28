@@ -250,8 +250,8 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: /Users/shiromiyahara/Desktop/AppDevelopment/13_School/Android/user.keystore
-  AndroidKeyaliasName: com.harekore.school
+  AndroidKeystoreName: /Users/shiromiyahara/Desktop/AppDevelopment/14_Castle/Android/user.keystore
+  AndroidKeyaliasName: com.harekore.castle
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
